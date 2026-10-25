@@ -1,0 +1,1379 @@
+{
+    "questions": [
+    {
+      "id": 1,
+      "q": "In which year was the global Ismaili Constitution ordained?",
+      "a": "1986"
+    },
+    {
+      "id": 2,
+      "q": "On what date was Aga Khan V's Accession Ceremony held?",
+      "a": "11 February 2025"
+    },
+    {
+      "id": 3,
+      "q": "At which school was Prince Rahim Aga Khan V educated?",
+      "a": "Phillips Academy Andover"
+    },
+    {
+      "id": 4,
+      "q": "From which university did Prince Rahim Aga Khan V graduate in 1995?",
+      "a": "Brown University"
+    },
+    {
+      "id": 5,
+      "q": "In which subject did Prince Rahim Aga Khan V take his Bachelor of Arts?",
+      "a": "Comparative Literature"
+    },
+    {
+      "id": 6,
+      "q": "Before acceding to the Imamat, Prince Rahim Aga Khan V served as Chairman of which AKDN committee?",
+      "a": "The Environment and Climate Committee"
+    },
+    {
+      "id": 7,
+      "q": "In which year did the parliament of the Republic of Portugal unanimously ratify a landmark Faith Agreement with the Ismaili Imamat?",
+      "a": "2010"
+    },
+    {
+      "id": 8,
+      "q": "On 11 July 2018, the designated premises of the Seat of the Ismaili Imamat in Lisbon were declared to be known by which name?",
+      "a": "The Diwan of the Ismaili Imamat"
+    },
+    {
+      "id": 9,
+      "q": "In a speech delivered in 2014, cited by the Ismaili Imamat, Aga Khan IV addressed which national parliament?",
+      "a": "The Parliament of Canada"
+    },
+    {
+      "id": 10,
+      "q": "Who conferred the title 'His Highness' on Prince Rahim Aga Khan V?",
+      "a": "King Charles III"
+    },
+    {
+      "id": 11,
+      "q": "Where is the seat of Ismaili Imamat?",
+      "a": "Lisbon, Portugal"
+    },
+    {
+      "id": 12,
+      "q": "What are the names of Prince Rahim Aga Khan V's two sons?",
+      "a": "Prince Irfan and Prince Sinan"
+    },
+    {
+      "id": 13,
+      "q": "In which years were Prince Irfan and Prince Sinan born?",
+      "a": "2015 and 2017"
+    },
+    {
+      "id": 14,
+      "q": "What environmental issue has Prince Rahim particularly focused on within AKDN?",
+      "a": "Climate change"
+    },
+    {
+      "id": 15,
+      "q": "On what date did the Ismaili Imamat and Portugal sign the agreement enabling a formal Seat?",
+      "a": "3 June 2015"
+    },
+    {
+      "id": 16,
+      "q": "Which company was established using Golden Jubilee proceeds to provide health, business, accident and life insurance plans?",
+      "a": "The Jubilee Insurance Company"
+    },
+    {
+      "id": 17,
+      "q": "The Diamond Jubile\\e Investment Trust, created in Dar es Salaam, continues today under which name?",
+      "a": "Diamond Trust Bank"
+    },
+    {
+      "id": 18,
+      "q": "Diamond Jubilee Schools were established in which areas of modern-day Pakistan?",
+      "a": "Hunza and Chitral"
+    },
+    {
+      "id": 19,
+      "q": "During the Golden Jubilee, the Aga Khan inaugurated the restoration of historic sites in which Syrian city?",
+      "a": "Aleppo"
+    },
+    {
+      "id": 20,
+      "q": "Which regional welfare society was formed following Aga Khan III's Golden Jubilee?",
+      "a": "East African Muslim Welfare Society"
+    },
+    {
+      "id": 21,
+      "q": "In Bombay, what broad purposes did the Diamond Jubilee trust fund support?",
+      "a": "Education and social welfare"
+    },
+    {
+      "id": 22,
+      "q": "In which city was the Diamond Jubilee Investment Trust created?",
+      "a": "Dar es Salaam"
+    },
+    {
+      "id": 23,
+      "q": "Which two cities hosted Aga Khan III's Platinum Jubilee observances named on the Imamat site?",
+      "a": "Karachi and Cairo"
+    },
+    {
+      "id": 24,
+      "q": "Name the famous Ismaili Castle in Iran?",
+      "a": "Alamut Castle"
+    },
+    {
+      "id": 25,
+      "q": "Which historic period is cited as offering lessons in leadership, intellectual search and pluralism?",
+      "a": "The Fatimid period"
+    },
+    {
+      "id": 26,
+      "q": "Which Ismaili Centre was opened during the Golden Jubilee of Aga Khan IV?",
+      "a": "The Ismaili Centre, Dubai"
+    },
+    {
+      "id": 27,
+      "q": "Where is the world's first Ismaili Centre located?",
+      "a": "London, UK"
+    },
+    {
+      "id": 28,
+      "q": "Where is the 2nd Ismaili Centre located?",
+      "a": "Burnaby, British Columbia (Greater Vancouver), Canada"
+    },
+    {
+      "id": 29,
+      "q": "Where is the 3rd Ismaili Centre located?",
+      "a": "Lisbon, Portugal"
+    },
+    {
+      "id": 30,
+      "q": "Where is the 4th Ismaili Centre located?",
+      "a": "Dubai, UAE"
+    },
+    {
+      "id": 31,
+      "q": "Where is the 5th Ismaili Centre located?",
+      "a": "Dushanbe, Tajikistan"
+    },
+    {
+      "id": 32,
+      "q": "Where is the 6th Ismaili Centre located?",
+      "a": "Toronto, Canada"
+    },
+    {
+      "id": 33,
+      "q": "Where is the 7th Ismaili Centre located?",
+      "a": "Houston, USA"
+    },
+    {
+      "id": 34,
+      "q": "Which Ismaili Centre opened in 1998?",
+      "a": "Lisbon"
+    },
+    {
+      "id": 35,
+      "q": "In which year did the Ismaili Centre, Dubai open?",
+      "a": "2008"
+    },
+    {
+      "id": 36,
+      "q": "Which Ismaili Centre opened in 2009, the first in Central Asia?",
+      "a": "Dushanbe"
+    },
+    {
+      "id": 37,
+      "q": "Which Ismaili Centre stands beside the Aga Khan Museum and the Aga Khan Park?",
+      "a": "The Ismaili Centre, Toronto"
+    },
+    {
+      "id": 38,
+      "q": "Which Ismaili Centre opened in 2025, the first in the United States?",
+      "a": "Houston"
+    },
+    {
+      "id": 39,
+      "q": "The foundation stone of the first Ismaili Centre was laid in which year?",
+      "a": "1979 (London)"
+    },
+    {
+      "id": 40,
+      "q": "In which year was the Ismaili Centre, Toronto opened?",
+      "a": "2014"
+    },
+    {
+      "id": 41,
+      "q": "Which is the only country to have 2 Ismaili Centres?",
+      "a": "Canada"
+    },
+    {
+      "id": 42,
+      "q": "Which was the first Ismaili Centre to be built in Muslim World?",
+      "a": "Ismaili Centre Dubai"
+    },
+    {
+      "id": 43,
+      "q": "How many Ismaili Centres are there in the world?",
+      "a": "7"
+    },
+    {
+      "id": 44,
+      "q": "Which Ismaili Center received LEED Gold certification?",
+      "a": "Ismaili Centre Houston"
+    },
+    {
+      "id": 45,
+      "q": "In which year did His Highness the Aga Khan establish the Conciliation and Arbitration Board (CAB) system?",
+      "a": "1986"
+    },
+    {
+      "id": 46,
+      "q": "In which country was the first Global Encounters Camp held in 2012?",
+      "a": "Kenya"
+    },
+    {
+      "id": 47,
+      "q": "The Time and Knowledge Nazrana (TKN) was launched as an initiative of which jubilee?",
+      "a": "The Golden Jubilee"
+    },
+    {
+      "id": 48,
+      "q": "Since which year have TKN volunteers been serving on assignments worldwide?",
+      "a": "2007"
+    },
+    {
+      "id": 49,
+      "q": "In which year was Focus Humanitarian Assistance (FOCUS) established by the Ismaili community under the guidance of His Highness the Aga Khan?",
+      "a": "1994"
+    },
+    {
+      "id": 50,
+      "q": "What does the abbreviation L-I-F stand for?",
+      "a": "Leaders' International Forum (Ismaili)"
+    },
+    {
+      "id": 51,
+      "q": "Where were the Jubilee Games 2016 held?",
+      "a": "Dubai"
+    },
+    {
+      "id": 52,
+      "q": "CAB stands for?",
+      "a": "Conciliation and Arbitration Board"
+    },
+    {
+      "id": 53,
+      "q": "Where was Global Encounters Festival 2025 held?",
+      "a": "Dubai, UAE"
+    },
+    {
+      "id": 54,
+      "q": "During which Jubilee was Global Encounters established?",
+      "a": "Diamond Jubilee of Mawlana Shah Karim"
+    },
+    {
+      "id": 55,
+      "q": "Which goal focuses on preserving and shaping cultures and shared heritage?",
+      "a": "Identity"
+    },
+    {
+      "id": 56,
+      "q": "Who founded GE Camps?",
+      "a": "Mawlana Shah Karim"
+    },
+    {
+      "id": 57,
+      "q": "Since which year does the impact report measure the long-run GE Camps participation record?",
+      "a": "2012"
+    },
+    {
+      "id": 58,
+      "q": "Where is the Kenya GE Camp hosted?",
+      "a": "Aga Khan Academy, Mombasa"
+    },
+    {
+      "id": 59,
+      "q": "In 2024, which Indian city hosted a first pilot Global Encounters programme?",
+      "a": "Mumbai"
+    },
+    {
+      "id": 60,
+      "q": "How many IIS publication series are aimed at a general audience?",
+      "a": "Three"
+    },
+    {
+      "id": 61,
+      "q": "What are IIS's two flagship graduate programmes?",
+      "a": "GPISH and STEP"
+    },
+    {
+      "id": 62,
+      "q": "In which year was The Institute of Ismaili Studies formally inaugurated?",
+      "a": "1977"
+    },
+    {
+      "id": 63,
+      "q": "Who authored 'The Ismailis: Their History and Doctrines', published in 1990?",
+      "a": "Dr Farhad Daftary"
+    },
+    {
+      "id": 64,
+      "q": "In which year did The Institute of Ismaili Studies move to its permanent home at the Aga Khan Centre?",
+      "a": "2018"
+    },
+    {
+      "id": 65,
+      "q": "Who wrote 'Ismaili Festivals: Stories of Celebration', the first title in the Living Ismaili Traditions series?",
+      "a": "Dr Shiraz Kabani"
+    },
+    {
+      "id": 66,
+      "q": "The IIS Doctoral Scholarship Programme is named after which person?",
+      "a": "Farhad Daftary"
+    },
+    {
+      "id": 67,
+      "q": "Where is the Institute of Ismaili Studies located?",
+      "a": "London, UK"
+    },
+    {
+      "id": 68,
+      "q": "Name the building in which IIS is located?",
+      "a": "Aga Khan Centre"
+    },
+    {
+      "id": 69,
+      "q": "The IIS Master's programme in Islamic Studies was run in collaboration with which university?",
+      "a": "McGill University"
+    },
+    {
+      "id": 70,
+      "q": "Which two broad academic toolsets does GPISH train students to use?",
+      "a": "Humanities and social sciences"
+    },
+    {
+      "id": 71,
+      "q": "GPISH relates religious ideas to what broader dimensions?",
+      "a": "Society and culture"
+    },
+    {
+      "id": 72,
+      "q": "Which UK university currently partners with IIS for the GPISH MA?",
+      "a": "SOAS University of London"
+    },
+    {
+      "id": 73,
+      "q": "In which year was the Ismaili Special Collections Unit established?",
+      "a": "2013"
+    },
+    {
+      "id": 74,
+      "q": "What does ISCU stand for?",
+      "a": "Ismaili Special Collections Unit"
+    },
+    {
+      "id": 75,
+      "q": "How many agencies work in concert within AKDN?",
+      "a": "Nine"
+    },
+    {
+      "id": 76,
+      "q": "What must all AKDN programmes respect alongside pluralism and gender equality?",
+      "a": "The environment"
+    },
+    {
+      "id": 77,
+      "q": "AKDN's ethical framework is rooted in the ethical principles of which faith?",
+      "a": "Islam"
+    },
+    {
+      "id": 78,
+      "q": "What does AKDN call the embrace of difference?",
+      "a": "Pluralism"
+    },
+    {
+      "id": 79,
+      "q": "The AKDN logo is formed of polygons of three, five and seven that create how many different yet congruent units?",
+      "a": "49"
+    },
+    {
+      "id": 80,
+      "q": "In which country is the Global Centre for Pluralism situated?",
+      "a": "Canada"
+    },
+    {
+      "id": 81,
+      "q": "What is AKDN's commitment to address climate change?",
+      "a": "Net Zero Carbon Emissions by 2030"
+    },
+    {
+      "id": 82,
+      "q": "Across how many university campuses do AKU and UCA prepare students, according to AKDN?",
+      "a": "Nine"
+    },
+    {
+      "id": 83,
+      "q": "Under which AKDN pillar is Early Childhood Development listed?",
+      "a": "Developing Human Capacity"
+    },
+    {
+      "id": 84,
+      "q": "Under which AKDN pillar is Financial Inclusion listed?",
+      "a": "Generating Economic Growth"
+    },
+    {
+      "id": 85,
+      "q": "Under which AKDN pillar are Parks & Gardens listed?",
+      "a": "Honouring Cultural Heritage"
+    },
+    {
+      "id": 86,
+      "q": "Which AKDN pillar includes Media?",
+      "a": "Generating Economic Growth"
+    },
+    {
+      "id": 87,
+      "q": "Which AKDN pillar includes Museum?",
+      "a": "Honouring Cultural Heritage"
+    },
+    {
+      "id": 88,
+      "q": "What is the central development aim stated on the AKDN home page?",
+      "a": "Improving the quality of life"
+    },
+    {
+      "id": 89,
+      "q": "In how many countries does the AKDN work?",
+      "a": "30 countries"
+    },
+    {
+      "id": 90,
+      "q": "How many main areas of activity are listed for AKF?",
+      "a": "Seven"
+    },
+    {
+      "id": 91,
+      "q": "Accelerate Prosperity is a joint venture with which AKFED division?",
+      "a": "Industrial Promotion Services (IPS)"
+    },
+    {
+      "id": 92,
+      "q": "AKF reports operating in how many countries?",
+      "a": "18 countries"
+    },
+    {
+      "id": 93,
+      "q": "The AKF 'Climate Resilience' area includes helping communities generate what?",
+      "a": "Clean energy"
+    },
+    {
+      "id": 94,
+      "q": "Name one international institution listed as an AKF partner.",
+      "a": "The World Bank"
+    },
+    {
+      "id": 95,
+      "q": "In what year did Aga Khan Foundation begin work in India?",
+      "a": "1978"
+    },
+    {
+      "id": 96,
+      "q": "In which year was the Aga Khan Foundation established?",
+      "a": "1967"
+    },
+    {
+      "id": 97,
+      "q": "Where are the Aga Khan Foundation's headquarters?",
+      "a": "Geneva, Switzerland"
+    },
+    {
+      "id": 98,
+      "q": "Which AKF programme works in 1,000 government schools across ten countries to improve learning?",
+      "a": "Schools2030"
+    },
+    {
+      "id": 99,
+      "q": "The Madrasa Early Childhood Programme operates in which three East African countries?",
+      "a": "Kenya, Tanzania and Uganda"
+    },
+    {
+      "id": 100,
+      "q": "In which year was the Aga Khan Foundation established in Bangladesh?",
+      "a": "1980"
+    },
+    {
+      "id": 101,
+      "q": "Which humanitarian agency was brought into AKAH when it was established?",
+      "a": "Focus Humanitarian Assistance (FOCUS)"
+    },
+    {
+      "id": 102,
+      "q": "Which AKDN planning and building service was brought into AKAH?",
+      "a": "Aga Khan Planning and Building Services"
+    },
+    {
+      "id": 103,
+      "q": "Which disaster-risk programme was brought into AKAH?",
+      "a": "Disaster Risk Management Initiative"
+    },
+    {
+      "id": 104,
+      "q": "Which environmental fund was brought into AKAH?",
+      "a": "Prince Sadruddin Aga Khan Fund for the Environment"
+    },
+    {
+      "id": 105,
+      "q": "When was Aga Khan Agency for Habitat (AKAH) founded?",
+      "a": "2016"
+    },
+    {
+      "id": 106,
+      "q": "Which agency is specifically responsible for disaster preparedness and response?",
+      "a": "Aga Khan Agency for Habitat (AKAH)"
+    },
+    {
+      "id": 107,
+      "q": "How many hazard-resilient homes has AKAH helped communities in remote areas build?",
+      "a": "50,000"
+    },
+    {
+      "id": 108,
+      "q": "How many glacial lakes does AKAH monitor?",
+      "a": "15"
+    },
+    {
+      "id": 109,
+      "q": "What was the first AKHS institution in Pakistan called?",
+      "a": "Janbai Maternity Home"
+    },
+    {
+      "id": 110,
+      "q": "In which year did Janbai Maternity Home open?",
+      "a": "1924"
+    },
+    {
+      "id": 111,
+      "q": "In which city did Janbai Maternity Home open?",
+      "a": "Karachi"
+    },
+    {
+      "id": 112,
+      "q": "How many hospitals does AKDN operate in East Africa?",
+      "a": "Four"
+    },
+    {
+      "id": 113,
+      "q": "In which year was Aga Khan Health Service, Afghanistan established?",
+      "a": "2003"
+    },
+    {
+      "id": 114,
+      "q": "AKHS traces the origins of its work to which period?",
+      "a": "The 1920s"
+    },
+    {
+      "id": 115,
+      "q": "Alongside Aga Khan Health Services, which two agencies make up the three AKDN health agencies?",
+      "a": "The Aga Khan Foundation and the Aga Khan University"
+    },
+    {
+      "id": 116,
+      "q": "How many agencies make up AKDN's health sector?",
+      "a": "Three (AKHS, the Aga Khan Foundation and the Aga Khan University)"
+    },
+    {
+      "id": 117,
+      "q": "Which AKDN agency continues the health work begun in the 1920s?",
+      "a": "Aga Khan Health Services (AKHS)"
+    },
+    {
+      "id": 118,
+      "q": "Which three East African countries are named in AKHS's integrated health-system work?",
+      "a": "Kenya, Tanzania and Uganda"
+    },
+    {
+      "id": 119,
+      "q": "What governance model does AKHS use in each country of operation?",
+      "a": "A not-for-profit NGO"
+    },
+    {
+      "id": 120,
+      "q": "Where is the AKHS Head Office located?",
+      "a": "Geneva, Switzerland"
+    },
+    {
+      "id": 121,
+      "q": "Which AKDN education agency does AKHS work with to integrate health issues into projects?",
+      "a": "Aga Khan Education Services"
+    },
+    {
+      "id": 122,
+      "q": "Which habitat agency does AKHS partner with on integrated health issues?",
+      "a": "Aga Khan Agency for Habitat"
+    },
+    {
+      "id": 123,
+      "q": "Which Afghan ministry partners with AKHS Afghanistan?",
+      "a": "Ministry of Public Health"
+    },
+    {
+      "id": 124,
+      "q": "How many hospitals and outreach health centres do AKHS and AKU manage together?",
+      "a": "940"
+    },
+    {
+      "id": 125,
+      "q": "The three AKDN health agencies together provide health care to how many people each year?",
+      "a": "14 million (as stated by AKHS)"
+    },
+    {
+      "id": 126,
+      "q": "What does AKHSP stand for?",
+      "a": "Aga Khan Health Service, Pakistan"
+    },
+    {
+      "id": 127,
+      "q": "In which year did the Aga Khan Medical Centre, Gilgit open?",
+      "a": "2016"
+    },
+    {
+      "id": 128,
+      "q": "In which year did the Aga Khan hospital in Nairobi become the Aga Khan University Hospital, Nairobi?",
+      "a": "2005"
+    },
+    {
+      "id": 129,
+      "q": "In which year did the Aga Khan University receive its Charter from the Government of Kenya?",
+      "a": "2021"
+    },
+    {
+      "id": 130,
+      "q": "In which year was Aga Khan University founded?",
+      "a": "1983"
+    },
+    {
+      "id": 131,
+      "q": "Which AKU unit focuses on improving teaching and school management?",
+      "a": "Institutes for Educational Development"
+    },
+    {
+      "id": 132,
+      "q": "What does ISMC stand for at AKU?",
+      "a": "Institute for the Study of Muslim Civilisations"
+    },
+    {
+      "id": 133,
+      "q": "Who is identified as serving as the Aga Khan University's Pro-Chancellor?",
+      "a": "Princess Zahra Aga Khan"
+    },
+    {
+      "id": 134,
+      "q": "In how many countries does the Aga Khan University operate?",
+      "a": "Six"
+    },
+    {
+      "id": 135,
+      "q": "The AKU University Hospitals Network comprises how many hospitals?",
+      "a": "Seven hospitals"
+    },
+    {
+      "id": 136,
+      "q": "GSMC stands for?",
+      "a": "Graduate School of Media and Communications"
+    },
+    {
+      "id": 137,
+      "q": "The Brain and Mind Institute is based in which two countries?",
+      "a": "Kenya and Pakistan"
+    },
+    {
+      "id": 138,
+      "q": "In which year was the Aga Khan University's Graduate School of Media and Communications launched?",
+      "a": "2015"
+    },
+    {
+      "id": 139,
+      "q": "Name the Universities established by His Late Highness Aga Khan IV?",
+      "a": "Aga Khan University, University of Central Asia"
+    },
+    {
+      "id": 140,
+      "q": "In which year was Princess Zahra Aga Khan formally installed as AKU's first Pro-Chancellor?",
+      "a": "2026 (she was appointed in 2025)"
+    },
+    {
+      "id": 141,
+      "q": "Which architectural firm designed the Aga Khan University campus in Karachi?",
+      "a": "Payette"
+    },
+    {
+      "id": 142,
+      "q": "Who is the Chancellor of the Aga Khan University?",
+      "a": "His Highness the Aga Khan (Aga Khan V)"
+    },
+    {
+      "id": 143,
+      "q": "In which year was the Aga Khan University School of Nursing and Midwifery established?",
+      "a": "1980 - three years before the University itself"
+    },
+    {
+      "id": 144,
+      "q": "What does the abbreviation SONAM stand for at AKU?",
+      "a": "School of Nursing and Midwifery"
+    },
+    {
+      "id": 145,
+      "q": "In which year did AKU start Pakistan's first four-year BScN programme?",
+      "a": "1997"
+    },
+    {
+      "id": 146,
+      "q": "What does BScN stand for?",
+      "a": "Bachelor of Science in Nursing"
+    },
+    {
+      "id": 147,
+      "q": "In which year did AKU introduce Pakistan's first Master of Science in Nursing (MScN)?",
+      "a": "2001"
+    },
+    {
+      "id": 148,
+      "q": "In which year was Pakistan's first PhD in Nursing awarded, by AKU-SONAM?",
+      "a": "2019"
+    },
+    {
+      "id": 149,
+      "q": "BScN graduates must pass the licensure examination of which body?",
+      "a": "The Pakistan Nursing Council (PNC)"
+    },
+    {
+      "id": 150,
+      "q": "What does AKU-EB stand for?",
+      "a": "Aga Khan University Examination Board"
+    },
+    {
+      "id": 151,
+      "q": "AKU-EB was established through a Government of Pakistan Ordinance on which date?",
+      "a": "8 November 2002 (the Board was established in August 2003)"
+    },
+    {
+      "id": 152,
+      "q": "In which year did AKU-EB hold its first examination?",
+      "a": "2007"
+    },
+    {
+      "id": 153,
+      "q": "In which year were AKU Hospital's Clinical Laboratories first accredited by the College of American Pathologists?",
+      "a": "2017"
+    },
+    {
+      "id": 154,
+      "q": "In which year did AKUH Karachi become the first hospital in Pakistan accredited by the Joint Commission International?",
+      "a": "2006"
+    },
+    {
+      "id": 155,
+      "q": "Besides the tertiary hospital in Karachi, how many secondary care hospitals does AKUH run in Pakistan?",
+      "a": "Four"
+    },
+    {
+      "id": 156,
+      "q": "What is the present size of AKU's Stadium Road campus in Karachi?",
+      "a": "84 acres"
+    },
+    {
+      "id": 157,
+      "q": "AKU is developing a climate change and environmental research station on its property in which Tanzanian town?",
+      "a": "Arusha"
+    },
+    {
+      "id": 158,
+      "q": "How large is AKU's property at Arusha?",
+      "a": "3,700 acres"
+    },
+    {
+      "id": 159,
+      "q": "In which Ugandan city is AKU building a 60-acre campus with a University Centre and hospital?",
+      "a": "Kampala"
+    },
+    {
+      "id": 160,
+      "q": "In which year did AKU open a health centre in Arusha, Tanzania?",
+      "a": "2013"
+    },
+    {
+      "id": 161,
+      "q": "In which year and month was the Aga Khan University's first convocation held?",
+      "a": "March 1989"
+    },
+    {
+      "id": 162,
+      "q": "Which new AKU faculty, its first in Pakistan in 30 years, welcomed its inaugural undergraduate class on the Stadium Road campus?",
+      "a": "The Faculty of Arts and Sciences (FAS)"
+    },
+    {
+      "id": 163,
+      "q": "In 2024, AKU began work in Karachi on its largest project to date in which form of energy?",
+      "a": "Solar power"
+    },
+    {
+      "id": 164,
+      "q": "How many medical centres does AKUH Nairobi operate across Kenya?",
+      "a": "50"
+    },
+    {
+      "id": 165,
+      "q": "In which year did AKU open its US$ 50 million Heart and Cancer Centre in Nairobi?",
+      "a": "2011"
+    },
+    {
+      "id": 166,
+      "q": "In which Nairobi suburb did AKUH open a fully equipped mother and child medical centre in 2016?",
+      "a": "Komarock"
+    },
+    {
+      "id": 167,
+      "q": "Which AKU institute in East Africa researches regional integration, biodiversity and the creative economy?",
+      "a": "The East African Institute"
+    },
+    {
+      "id": 168,
+      "q": "Which AKU institute focuses on children's earliest years and their life chances?",
+      "a": "The Institute for Human Development"
+    },
+    {
+      "id": 169,
+      "q": "Which specialty centre did AKU inaugurate in Kampala, providing advanced diagnostics?",
+      "a": "The Nakawa Specialty Centre"
+    },
+    {
+      "id": 170,
+      "q": "Aga Khan Education Services traces its history to which year?",
+      "a": "1905"
+    },
+    {
+      "id": 171,
+      "q": "AKES pre-primary units are mainly located in which two countries?",
+      "a": "Pakistan and Afghanistan"
+    },
+    {
+      "id": 172,
+      "q": "In which year was the Aga Khan Academies network initiated?",
+      "a": "2000"
+    },
+    {
+      "id": 173,
+      "q": "In which year did the first Aga Khan Academy open in Mombasa?",
+      "a": "2003"
+    },
+    {
+      "id": 174,
+      "q": "In which year did the Aga Khan Academy Hyderabad - India begin operating?",
+      "a": "2011"
+    },
+    {
+      "id": 175,
+      "q": "In which year did the Aga Khan Academy Dhaka open?",
+      "a": "2022"
+    },
+    {
+      "id": 176,
+      "q": "In how many countries does AKS operate?",
+      "a": "12 countries"
+    },
+    {
+      "id": 177,
+      "q": "The starting age of '18 months' in the AKS age range most directly signals attention to which stage of learning?",
+      "a": "Early childhood"
+    },
+    {
+      "id": 178,
+      "q": "In how many countries does Aga Khan Education Services work?",
+      "a": "10"
+    },
+    {
+      "id": 179,
+      "q": "Which curriculum is taught in Aga Khan Academies?",
+      "a": "IB Curriculum"
+    },
+    {
+      "id": 180,
+      "q": "What two components make up Aga Khan Schools?",
+      "a": "Aga Khan Education Services and Aga Khan Academies"
+    },
+    {
+      "id": 181,
+      "q": "Across which three broad regions does the AKS network operate?",
+      "a": "East Africa, the Middle East, and South and Central Asia"
+    },
+    {
+      "id": 182,
+      "q": "Is Aga Khan Schools described as for-profit or not-for-profit?",
+      "a": "Not-for-profit"
+    },
+    {
+      "id": 183,
+      "q": "Which AKS component provides an integrated network of schools for exceptional students?",
+      "a": "Aga Khan Academies"
+    },
+    {
+      "id": 184,
+      "q": "Which AKS component is built on a century of leadership in education?",
+      "a": "Aga Khan Education Services"
+    },
+    {
+      "id": 185,
+      "q": "About how many schools do the Aga Khan Schools operate?",
+      "a": "200"
+    },
+    {
+      "id": 186,
+      "q": "Which President of Kenya inaugurated the Aga Khan Academy Mombasa?",
+      "a": "Mwai Kibaki"
+    },
+    {
+      "id": 187,
+      "q": "Which local architectural style inspired the campus of the Aga Khan Academy Mombasa?",
+      "a": "Swahili architecture"
+    },
+    {
+      "id": 188,
+      "q": "What is the size of the Aga Khan Academy Hyderabad campus?",
+      "a": "100 acres"
+    },
+    {
+      "id": 189,
+      "q": "In which year did the Aga Khan Academy Maputo open?",
+      "a": "2013"
+    },
+    {
+      "id": 190,
+      "q": "About how many students do AKES schools educate each year?",
+      "a": "About 73,000"
+    },
+    {
+      "id": 191,
+      "q": "In which town was the first Aga Khan School in Pakistan founded in 1905?",
+      "a": "Gwadar, Balochistan"
+    },
+    {
+      "id": 192,
+      "q": "In which year was the University of Central Asia founded?",
+      "a": "2000"
+    },
+    {
+      "id": 193,
+      "q": "With which international organisation was UCA's founding treaty registered?",
+      "a": "United Nations"
+    },
+    {
+      "id": 194,
+      "q": "In which year was UCA's first residential campus in Naryn inaugurated?",
+      "a": "2016"
+    },
+    {
+      "id": 195,
+      "q": "Name one of UCA's named schools / areas of activity.",
+      "a": "The School of Arts and Sciences"
+    },
+    {
+      "id": 196,
+      "q": "Which agency is dedicated to providing higher education in Central Asia?",
+      "a": "UCA"
+    },
+    {
+      "id": 197,
+      "q": "Who gifted the 252-hectare site of UCA's Naryn campus?",
+      "a": "The Kyrgyz Government"
+    },
+    {
+      "id": 198,
+      "q": "How many undergraduate students formed UCA Naryn's first class?",
+      "a": "71"
+    },
+    {
+      "id": 199,
+      "q": "In which town is UCA's campus in Tajikistan?",
+      "a": "Khorog"
+    },
+    {
+      "id": 200,
+      "q": "In which Kazakh town is UCA's third campus planned?",
+      "a": "Tekeli"
+    },
+    {
+      "id": 201,
+      "q": "Where is the Aga Khan Park located?",
+      "a": "Toronto, Canada"
+    },
+    {
+      "id": 202,
+      "q": "In which year was the Aga Khan Trust for Culture founded, and where is it headquartered?",
+      "a": "Founded 1988, headquartered in Geneva, Switzerland"
+    },
+    {
+      "id": 203,
+      "q": "Name one of the constituent programmes of AKTC.",
+      "a": "The Aga Khan Award for Architecture"
+    },
+    {
+      "id": 204,
+      "q": "AKTC's remit includes an award specifically dedicated to which art form, alongside its architecture award?",
+      "a": "Music"
+    },
+    {
+      "id": 205,
+      "q": "The Aga Khan Programme for Islamic Architecture is based at which institutions?",
+      "a": "Harvard University and the Massachusetts Institute of Technology"
+    },
+    {
+      "id": 206,
+      "q": "In which year was the Aga Khan Award for Architecture established?",
+      "a": "1977"
+    },
+    {
+      "id": 207,
+      "q": "How often is the Aga Khan Award for Architecture presented?",
+      "a": "Every three years"
+    },
+    {
+      "id": 208,
+      "q": "What is the prize fund for the Aga Khan Award for Architecture?",
+      "a": "$1 million"
+    },
+    {
+      "id": 209,
+      "q": "In which city was the 2022 Aga Khan Award for Architecture ceremony held?",
+      "a": "Muscat, Oman"
+    },
+    {
+      "id": 210,
+      "q": "In which year was the Aga Khan Program for Islamic Architecture established?",
+      "a": "1979"
+    },
+    {
+      "id": 211,
+      "q": "Laureates of the Aga Khan Music Awards share a prize fund of what value?",
+      "a": "$500,000"
+    },
+    {
+      "id": 212,
+      "q": "In which year did the Aga Khan Museum in Toronto open?",
+      "a": "2014"
+    },
+    {
+      "id": 213,
+      "q": "In which year did the Humayun World Heritage Site Museum open?",
+      "a": "2024"
+    },
+    {
+      "id": 214,
+      "q": "How many parks and gardens has the Aga Khan Trust for Culture created or rehabilitated?",
+      "a": "13"
+    },
+    {
+      "id": 215,
+      "q": "In which year did Al-Azhar Park in Cairo open?",
+      "a": "2005"
+    },
+    {
+      "id": 216,
+      "q": "What is the size of Al-Azhar Park in Cairo?",
+      "a": "30 hectares"
+    },
+    {
+      "id": 217,
+      "q": "Alongside Cairo and Delhi, AKTC parks and gardens have been created in which two other cities named by AKDN?",
+      "a": "Bamako and Kabul"
+    },
+    {
+      "id": 218,
+      "q": "Which space joins together Ismaili Centre Toronto and Aga Khan Museum?",
+      "a": "Aga Khan Park"
+    },
+    {
+      "id": 219,
+      "q": "When was Aga Khan Music Award (AKMA) announced?",
+      "a": "2018"
+    },
+    {
+      "id": 220,
+      "q": "Which website has AKDN developed for Architecture?",
+      "a": "www.archnet.org"
+    },
+    {
+      "id": 221,
+      "q": "Which historic monument was discovered during the excavation for Al-Azhar Park?",
+      "a": "The Ayyubid Wall"
+    },
+    {
+      "id": 222,
+      "q": "Which famous mosque was restored by AKTC in Lahore?",
+      "a": "Wazir Khan Mosque"
+    },
+    {
+      "id": 223,
+      "q": "Name the famous fort restored by AKTC in Gilgit Baltistan?",
+      "a": "Baltit Fort"
+    },
+    {
+      "id": 224,
+      "q": "How many cycles of Aga Khan Music Awards completed so far?",
+      "a": "3 cycles"
+    },
+    {
+      "id": 225,
+      "q": "Where was the 2025 Award Ceremony held for AKMA?",
+      "a": "London, United Kingdom"
+    },
+    {
+      "id": 226,
+      "q": "In what year was AKTC founded?",
+      "a": "1988"
+    },
+    {
+      "id": 227,
+      "q": "From which region to which region does the Aga Khan Museum present arts of Muslim civilisations?",
+      "a": "From the Iberian Peninsula to China"
+    },
+    {
+      "id": 228,
+      "q": "What kind of planning accompanies AKHCP restoration and public-space work?",
+      "a": "Community-based planning and upgrading"
+    },
+    {
+      "id": 229,
+      "q": "What employment-related element is part of AKHCP's regeneration approach?",
+      "a": "Employment and vocational training programmes"
+    },
+    {
+      "id": 230,
+      "q": "What urban function are AKDN parks and gardens described as providing?",
+      "a": "A green lung"
+    },
+    {
+      "id": 231,
+      "q": "Which Cairo district benefited from urban renewal catalysed by Al-Azhar Park?",
+      "a": "Darb al-Ahmar"
+    },
+    {
+      "id": 232,
+      "q": "In what year did AKTC's involvement in Egypt begin with the decision to donate a park?",
+      "a": "1984"
+    },
+    {
+      "id": 233,
+      "q": "Which 14th-century Cairo mosque, known as the Blue Mosque, did AKTC restore?",
+      "a": "The Mosque of Amir Aqsunqur"
+    },
+    {
+      "id": 234,
+      "q": "Why had the Blue Mosque in Cairo been closed since 1992?",
+      "a": "Earthquake damage"
+    },
+    {
+      "id": 235,
+      "q": "Which Kabul mausoleum did AKTC begin restoring in 2003?",
+      "a": "The Timur Shah Mausoleum"
+    },
+    {
+      "id": 236,
+      "q": "Which UNESCO honour did the restoration of Altit Fort receive in 2011?",
+      "a": "The Asia-Pacific Award of Distinction"
+    },
+    {
+      "id": 237,
+      "q": "How many UNESCO Asia-Pacific Heritage Awards has AKTC won in Pakistan?",
+      "a": "15"
+    },
+    {
+      "id": 238,
+      "q": "In which city is the National Park of Mali, created with AKTC?",
+      "a": "Bamako"
+    },
+    {
+      "id": 239,
+      "q": "In which year was AKTC's restoration of the Citadel of Aleppo completed?",
+      "a": "2006"
+    },
+    {
+      "id": 240,
+      "q": "In which year did Aga Khan IV inaugurate the restored Citadel of Aleppo?",
+      "a": "2008"
+    },
+    {
+      "id": 241,
+      "q": "Which landscape architect designed the Aga Khan Park in Toronto?",
+      "a": "Vladimir Djurovic"
+    },
+    {
+      "id": 242,
+      "q": "Which architect designed the Aga Khan Museum in Toronto?",
+      "a": "Fumihiko Maki"
+    },
+    {
+      "id": 243,
+      "q": "What is the size of the Aga Khan Park in Toronto?",
+      "a": "6.8 hectares"
+    },
+    {
+      "id": 244,
+      "q": "In which year was First MicroFinance Bank Pakistan established?",
+      "a": "2002"
+    },
+    {
+      "id": 245,
+      "q": "Which international institution was a founding shareholder of First MicroFinance Bank Pakistan?",
+      "a": "IFC"
+    },
+    {
+      "id": 246,
+      "q": "In which year was First MicroFinance Bank Tajikistan established?",
+      "a": "2003"
+    },
+    {
+      "id": 247,
+      "q": "In which year did AKDN launch the Kyrgyz Microfinance Programme?",
+      "a": "2003"
+    },
+    {
+      "id": 248,
+      "q": "In which country did AKDN establish a Microcredit Facility in 2003?",
+      "a": "Syria"
+    },
+    {
+      "id": 249,
+      "q": "In which year was First MicroFinance Bank Afghanistan established?",
+      "a": "2004"
+    },
+    {
+      "id": 250,
+      "q": "Which telecom company provided the mPaisa platform used by FMFB-A?",
+      "a": "Roshan"
+    },
+    {
+      "id": 251,
+      "q": "In which year did FMFB-A open Afghanistan's first women-only branch?",
+      "a": "2017"
+    },
+    {
+      "id": 252,
+      "q": "What was FMFB-PAKISTAN rebranded as in 2022?",
+      "a": "HBL Microfinance Bank"
+    },
+    {
+      "id": 253,
+      "q": "What was FMFB-Tajikistan rebranded as in 2024?",
+      "a": "Investment & Credit Bank - Tajikistan"
+    },
+    {
+      "id": 254,
+      "q": "In which year were AKDN's microfinance programmes brought together under the Aga Khan Agency for Microfinance?",
+      "a": "2005"
+    },
+    {
+      "id": 255,
+      "q": "In which month and year was the Aga Khan Agency for Microfinance formally inaugurated?",
+      "a": "February 2005"
+    },
+    {
+      "id": 256,
+      "q": "In how many countries does AKAM operate microfinance programmes and institutions?",
+      "a": "13"
+    },
+    {
+      "id": 257,
+      "q": "In which year was HBL privatised by the Government of Pakistan?",
+      "a": "2004"
+    },
+    {
+      "id": 258,
+      "q": "Which bank did AKFED acquire a majority shareholding in during Pakistan's privatisation programme?",
+      "a": "HBL"
+    },
+    {
+      "id": 259,
+      "q": "In which year did HBL acquire management control of HBL Microfinance Bank?",
+      "a": "2016"
+    },
+    {
+      "id": 260,
+      "q": "In which year did Serena Shigar Fort win a UNESCO Asia-Pacific Heritage Award?",
+      "a": "2006"
+    },
+    {
+      "id": 261,
+      "q": "In which year did Serena Khaplu Palace receive a UNESCO Award for Distinction?",
+      "a": "2013"
+    },
+    {
+      "id": 262,
+      "q": "Which AKDN agency is described as the only one in the Network that works on a commercial basis?",
+      "a": "The Aga Khan Fund for Economic Development"
+    },
+    {
+      "id": 263,
+      "q": "In which country is Azito Power, the largest private-sector power plant in sub-Saharan Africa, located?",
+      "a": "Côte d'Ivoire"
+    },
+    {
+      "id": 264,
+      "q": "In which year did AKDN launch the telecom company operating under the Roshan brand in Afghanistan?",
+      "a": "2003"
+    },
+    {
+      "id": 265,
+      "q": "Which two Kenyan newspapers did Aga Khan IV establish while still a student?",
+      "a": "Taifa and Nation"
+    },
+    {
+      "id": 266,
+      "q": "In which year were the Sunday Nation and Daily Nation launched?",
+      "a": "1960"
+    },
+    {
+      "id": 267,
+      "q": "AKFED's Tourism Promotion Services is associated with which hospitality brand?",
+      "a": "Serena hotels"
+    },
+    {
+      "id": 268,
+      "q": "Which bank's chairmanship of the SCO Interbank Consortium is highlighted?",
+      "a": "HBL"
+    },
+    {
+      "id": 269,
+      "q": "In which year was the Islamabad Serena Hotel inaugurated?",
+      "a": "2002"
+    },
+    {
+      "id": 270,
+      "q": "Which President of Pakistan inaugurated the Islamabad Serena Hotel?",
+      "a": "President Pervez Musharraf"
+    },
+    {
+      "id": 271,
+      "q": "In which year was Jubilee General Insurance established in Pakistan?",
+      "a": "1953"
+    },
+    {
+      "id": 272,
+      "q": "In which year was Pamir Energy formed, with the International Finance Corporation?",
+      "a": "2002"
+    },
+    {
+      "id": 273,
+      "q": "Which international award did Pamir Energy receive in 2017?",
+      "a": "The Ashden Award"
+    },
+    {
+      "id": 274,
+      "q": "Under what name was Tcell launched in 2002?",
+      "a": "Indigo Tajikistan"
+    },
+    {
+      "id": 275,
+      "q": "In which year did the Dushanbe Serena Hotel open?",
+      "a": "2011"
+    }
+  ]
+}
