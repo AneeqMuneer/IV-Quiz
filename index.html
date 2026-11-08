@@ -179,8 +179,20 @@ header.top{flex-wrap:wrap}
 
 .ans-box .aen,.ans-box .aur{margin:0}
 .ecard .ans{margin-top:0}
-.wait{margin:0 auto;max-width:46ch}
+.wait{margin:0 auto 18px;max-width:46ch;text-align:center}
 .eactions .pill[disabled]{display:none}
+.enav .btn.right,.enav .btn.wrong{flex:1.5;justify-content:center;font-size:17px;padding:16px 18px;color:#fff;border:0}
+.enav .btn.right{background:#168a57}.enav .btn.wrong{background:#c4403c}
+.enav .btn.right:hover,.enav .btn.wrong:hover{filter:brightness(1.08)}
+.tr .mk{min-width:18px;font-weight:700}.tr .mk.ok{color:#168a57}.tr .mk.no{color:#c4403c}
+
+.codein{width:100%;font:700 26px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.35em;text-align:center;text-transform:uppercase;padding:13px 10px 13px 22px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);margin:0 0 8px}
+.codein::placeholder{color:var(--mute);opacity:.45}
+.codein:focus-visible{outline:3px solid color-mix(in srgb,var(--brand) 45%,transparent);outline-offset:2px;border-color:var(--brand)}
+.codebox{margin:4px 0 14px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.code{font:800 clamp(42px,11vw,68px)/1.1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.2em;padding-left:.2em;color:var(--brand)}
+.codesm{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.14em}
+.role .error{min-height:0;margin:0 0 8px}
 </style>
 </head>
 <body>
@@ -247,57 +259,63 @@ header.top{flex-wrap:wrap}
     </section>
     </div>
 
-    <!-- ===== EXAM: setup ===== -->
+    <!-- ===== EXAM: home (create or open) ===== -->
+    <section id="examHome" class="exam-view card hero">
+      <h2>Exam mode</h2>
+      <p class="sub">Rapid-fire practice with a quiz master and a team. The quiz master creates a quiz and gets a 6-character code. The team enters that code to open the same quiz.</p>
+      <div class="roles">
+        <div class="role">
+          <h3>Create a quiz</h3>
+          <p>You're the quiz master. Choose the range and number of questions, and you'll get a code to share.</p>
+          <div class="btns"><button class="btn primary sm" id="hmCreate" type="button">Create quiz →</button></div>
+          <p class="hint" id="hmLast" style="margin:12px 0 0"></p>
+        </div>
+        <div class="role">
+          <h3>Open a quiz</h3>
+          <p>Enter the 6-character code from the quiz master.</p>
+          <input class="codein" id="joinCode" maxlength="6" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ABC123" aria-label="Quiz code">
+          <p class="error" id="joinErr" role="alert"></p>
+          <div class="btns"><button class="btn primary sm" id="hmJoin" type="button">Join as team →</button><button class="btn ghost sm" id="hmResume" type="button">I'm the quiz master</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXAM: create (quiz master settings) ===== -->
     <section id="examSetup" class="exam-view card hero">
-      <h2>Create a rapid-fire exam</h2>
-      <p class="sub">Pick the question range and how many questions you want. You'll get two screens: one for the quiz master (who controls the exam) and one for the team (who just follow along).</p>
+      <h2>Create a quiz</h2>
+      <p class="sub">Pick the question range and how many questions you want. Questions are drawn at random from the range. You'll get a code for the team.</p>
       <div class="fields three">
         <div class="field"><label for="exStart">Start question</label><input id="exStart" type="number" inputmode="numeric" min="1" placeholder="1" autocomplete="off"></div>
         <div class="field"><label for="exEnd">End question</label><input id="exEnd" type="number" inputmode="numeric" min="1" placeholder="275" autocomplete="off"></div>
         <div class="field"><label for="exCount">How many?</label><input id="exCount" type="number" inputmode="numeric" min="1" placeholder="20" autocomplete="off"></div>
       </div>
       <p class="hint" id="exHint"></p>
+      <p class="hint" id="exSeen" style="margin-top:-6px"></p>
       <p class="error" id="exErr" role="alert"></p>
-      <div class="row"><span></span><button class="btn primary" id="exCreate" type="button">Create exam →</button></div>
+      <div class="row"><button class="btn ghost" id="exBack" type="button">← Back</button><button class="btn primary" id="exCreate" type="button">Create quiz →</button></div>
       <div class="chips" id="exChips"></div>
-    </section>
-
-    <!-- ===== EXAM: ready ===== -->
-    <section id="examReady" class="exam-view card hero">
-      <h2>Your exam is ready</h2>
-      <p class="sub" id="rdSub"></p>
-      <div class="roles">
-        <div class="role">
-          <h3>Quiz master screen</h3>
-          <p>Urdu question, Start, Next, Back, Pause, and a Show answer button. Controls everything.</p>
-          <div class="btns"><a class="btn primary sm" id="rdMaster" target="_blank" rel="noopener">Open ↗</a><button class="btn ghost sm" type="button" data-copy="master">Copy link</button></div>
-        </div>
-        <div class="role">
-          <h3>Team screen</h3>
-          <p>English question and timer. It follows the quiz master. The team can only use Show answer.</p>
-          <div class="btns"><a class="btn primary sm" id="rdTeam" target="_blank" rel="noopener">Open ↗</a><button class="btn ghost sm" type="button" data-copy="team">Copy link</button></div>
-        </div>
-      </div>
-      <p class="hint">Open each screen on its own device (or in two tabs). They stay in sync over the internet, so both devices need to be online. Send the Team link to the other device.</p>
-      <div class="row">
-        <button class="btn ghost" id="rdEdit" type="button">Change range</button>
-        <button class="btn ghost" id="rdAgain" type="button">Draw different questions</button>
-      </div>
     </section>
 
     <!-- ===== EXAM: quiz master (controls everything) ===== -->
     <section id="master" class="exam-view">
       <div class="card hero" id="mGate" style="text-align:center">
         <h2>Quiz master screen</h2>
+        <div class="codebox"><span class="elab">Quiz code</span><b class="code" id="mCode"></b></div>
         <p class="sub wait" id="mGateSub"></p>
-        <button class="btn primary" id="mStart" type="button">Start exam ▶</button>
+        <div class="btns" style="justify-content:center;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" id="mStart" type="button">Start exam ▶</button>
+          <button class="btn ghost" id="mCopy" type="button">Copy team link</button>
+        </div>
+        <p class="hint">The team opens this site, goes to <b>Exam → Open a quiz</b>, and enters the code. They don't need to be online yet: they'll land on whichever question you're on.</p>
         <p class="hint"><span class="link-badge"></span></p>
+        <p class="hint"><button class="btn ghost sm" id="mNew2" type="button">Create a different quiz</button></p>
       </div>
       <div id="mRun" style="display:none">
         <div class="ebar card">
           <div class="ecell"><span class="elab">Quiz master · اردو</span><b id="mPos"></b></div>
           <div class="ecell"><span class="elab">This question</span><b class="big" id="mQTime">00:00</b></div>
           <div class="ecell"><span class="elab">Total</span><b id="mTotal">00:00</b></div>
+          <div class="ecell"><span class="elab">Code</span><b class="codesm" id="mCode2"></b></div>
           <div class="eactions">
             <button type="button" class="pill" id="mPause">Pause</button>
             <button type="button" class="pill voice-btn" aria-pressed="true"></button>
@@ -308,16 +326,15 @@ header.top{flex-wrap:wrap}
         <article class="card q ecard" id="mCard">
           <div class="qhead"><span class="pos" id="mNum"></span><span class="orig" id="mOrig"></span><button type="button" class="replay" id="mReplay" aria-label="Read question aloud" title="Read question aloud"></button></div>
           <div id="mQ"></div>
-          <button type="button" class="btn abtn" id="mShow" aria-expanded="false">Show answer</button>
-          <div class="ans" id="mAns"><div><div class="ans-box"><div class="ans-lab">Answer</div><div id="mA"></div></div></div></div>
+          <div class="ans open" style="margin-top:18px"><div><div class="ans-box"><div class="ans-lab">Correct answer</div><div id="mA"></div></div></div></div>
         </article>
-        <div class="enav"><button class="btn ghost" id="mPrev" type="button">← Back</button><button class="btn primary" id="mNext" type="button">Next question →</button></div>
-        <p class="keys">Keys: → next · ← back · A show/hide answer · P pause</p>
+        <div class="enav"><button class="btn ghost" id="mPrev" type="button">← Back</button><button class="btn wrong" id="mWrong" type="button">✗ Wrong</button><button class="btn right" id="mRight" type="button">✓ Correct</button></div>
+        <p class="keys">Mark the team's answer to move on · Keys: C correct · W wrong · ← back · P pause</p>
       </div>
       <div class="card done" id="mDone" style="display:none">
         <h3>Exam complete ✓</h3>
         <div id="mResults"></div>
-        <div class="btns"><button class="btn primary" id="mAgain" type="button">Run again</button><button class="btn ghost" id="mNew" type="button">New exam</button></div>
+        <div class="btns"><button class="btn primary" id="mAgain" type="button">Run again</button><button class="btn ghost" id="mNew" type="button">New quiz</button></div>
       </div>
     </section>
 
@@ -325,19 +342,19 @@ header.top{flex-wrap:wrap}
     <section id="team" class="exam-view">
       <div class="card hero" id="tGate" style="text-align:center">
         <h2>Team screen</h2>
+        <div class="codebox"><span class="elab">Quiz code</span><b class="code" id="tCode"></b></div>
         <p class="sub wait" id="tGateSub"></p>
         <p class="hint"><span class="link-badge"></span></p>
+        <p class="hint"><button class="btn ghost sm" id="tOther" type="button">Use a different code</button></p>
       </div>
       <div id="tRun" style="display:none">
         <div class="ebar card">
-          <div class="ecell"><span class="elab">Question</span><b id="tPos"></b></div>
           <div class="ecell"><span class="elab">This question</span><b class="big" id="tQTime">00:00</b></div>
           <div class="ecell"><span class="elab">Total</span><b id="tTotal">00:00</b></div>
           <div class="eactions"><span class="link-badge"></span></div>
         </div>
         <div class="prog"><i id="tBar"></i></div>
         <article class="card ecard">
-          <div class="qhead"><span class="pos" id="tNum"></span><span class="orig" id="tOrig"></span></div>
           <div id="tQ"></div>
           <button type="button" class="btn abtn" id="tShow" aria-expanded="false">Show answer</button>
           <div class="ans" id="tAns"><div><div class="ans-box"><div class="ans-lab">Answer</div><div id="tA"></div></div></div></div>
@@ -347,7 +364,7 @@ header.top{flex-wrap:wrap}
       <div class="card done" id="tDone" style="display:none">
         <h3>Exam complete ✓</h3>
         <div id="tResults"></div>
-        <p class="keys" style="margin-top:0">Waiting for the quiz master to start another round or finish.</p>
+        <p class="keys" style="margin-top:0">Waiting for the quiz master to start another round.</p>
       </div>
     </section>
   </main>
@@ -380,6 +397,21 @@ header.top{flex-wrap:wrap}
 
   /* ---------- helpers ---------- */
   function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  /* Fair random pick: remembers (per device) when each question was last asked and always prefers the
+     ones asked longest ago or never. Ties are broken randomly, so nothing repeats until the whole pool
+     has been used once. Separate history for practice and exam. */
+  function rndFloat(){ try{ var a = new Uint32Array(1); crypto.getRandomValues(a); return a[0]/4294967296; }catch(e){ return Math.random(); } }
+  function seenLoad(scope){ try{ return JSON.parse(localStorage.getItem("ivq-seen-"+scope)||"{}") || {}; }catch(e){ return {}; } }
+  function seenSave(scope, m){ try{ localStorage.setItem("ivq-seen-"+scope, JSON.stringify(m)); }catch(e){} }
+  function fairPick(pool, n, scope){
+    var seen = seenLoad(scope), clock = (seen._c||0) + 1;
+    var ranked = pool.map(function(q){ return {q:q, t:seen[q.id]||0, r:rndFloat()}; });
+    ranked.sort(function(a,b){ return (a.t-b.t) || (a.r-b.r); });
+    var take = ranked.slice(0, Math.min(n, ranked.length)).map(function(x){ return x.q; });
+    shuffle(take);                                         // random order within the quiz
+    take.forEach(function(q){ seen[q.id] = clock; }); seen._c = clock; seenSave(scope, seen);
+    return take;
+  }
   var TOK = "[A-Za-z0-9$\\u00C0-\\u017F(][A-Za-z0-9$\\u00C0-\\u017F'\\u2019\\u2018\"()&/%\\-.,:+\\u2013\\u2014]*";
   var RX = new RegExp(TOK + "(?: " + TOK + ")*", "g");
   function urNode(text, cls){
@@ -599,8 +631,7 @@ header.top{flex-wrap:wrap}
   /* ---------- quiz ---------- */
   function pick(){
     var pool = Q.filter(function(q){ return q.id>=state.start && q.id<=state.end; });
-    shuffle(pool);
-    state.picked = pool.length>PER ? pool.slice(0,PER) : pool;   // already randomly ordered
+    state.picked = fairPick(pool, PER, "practice");
     state.shown = {};
   }
   function begin(){
@@ -677,63 +708,108 @@ header.top{flex-wrap:wrap}
   $("back2").addEventListener("click", backToSetup);
   window.addEventListener("pagehide", function(){ if(SS) SS.cancel(); });
   updateHint();
+  (function(){
 
   /* =====================================================================
-     EXAM MODE  (routes: #/exam, #/exam/ready, #/exam/master, #/exam/team)
-     The quiz master screen is the single controller. The team screen only
-     follows the state the master sends. "Show answer" is local on each screen.
+     EXAM MODE  (routes: #/exam, #/exam/new, #/exam/master/CODE, #/exam/team/CODE)
+
+     The quiz master creates a quiz and gets a 6-character code. Every change the
+     quiz master makes is published as one small "state" message on a public
+     message topic named after the code (ntfy.sh). The service keeps recent
+     messages, so a screen that opens later simply reads the newest one and lands
+     on the current question. Nobody has to be online at the same time.
+     Also mirrored to localStorage so tabs in one browser sync instantly/offline.
      ===================================================================== */
   var byId = {}; Q.forEach(function(q){ byId[q.id] = q; });
-  var EX = {e:"", range:"", ids:[], qs:[], role:null, phase:"wait", idx:0, shown:false, paused:false,
-            times:[], qAcc:0, qStart:0, tid:null, linked:false, relay:false, gotState:false, helloTries:0};
-  var VIEWS = ["practiceView","examSetup","examReady","master","team"];
+  var ALPH = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";          // capital letters + digits, no look-alikes (O/0, I/1)
+  var RELAY = window.IVQ_RELAY || "https://ntfy.sh/";
+  var EX = null;
+  function blank(){
+    return {code:"", role:null, def:null, qs:[], phase:"wait", idx:0, shown:false, paused:false, times:[], marks:[],
+            qAcc:0, qStart:Date.now(), seq:0, pubSeq:0, relay:false, got:false, notFound:false, skew:0,
+            tid:null, pollT:null, nfT:null, es:null};
+  }
+  EX = blank();
+  var VIEWS = ["practiceView","examHome","examSetup","master","team"];
   var wrapEl = document.querySelector(".wrap"), footerTxt = $("footerTxt"), brandSub = $("brandSub");
   var footerOrig = footerTxt.textContent, brandOrig = brandSub.textContent;
-  function newToken(){ return Math.random().toString(36).slice(2,12); }
+  var LAST_KEY = "ivq-last-master";
 
   function showView(id){ VIEWS.forEach(function(v){ $(v).style.display = (v===id) ? "block" : "none"; }); }
-  function parseHash(){
-    var h = location.hash.replace(/^#/, ""), qi = h.indexOf("?"), params = {};
-    var path = qi>-1 ? h.slice(0,qi) : h;
-    if(qi>-1) h.slice(qi+1).split("&").forEach(function(p){ var kv = p.split("="); if(kv[0]) params[kv[0]] = decodeURIComponent(kv[1]||""); });
-    return {path: path || "/", params: params};
+  function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function genCode(){
+    var a = new Uint32Array(6), s = "";
+    if(window.crypto && crypto.getRandomValues) crypto.getRandomValues(a); else for(var j=0;j<6;j++) a[j] = Math.floor(Math.random()*4294967296);
+    for(var i=0;i<6;i++) s += ALPH.charAt(a[i] % ALPH.length);
+    return s;
   }
-  function examHash(page){ return "#/exam/"+page+"?e="+EX.e+"&r="+EX.range+"&q="+EX.ids.join(","); }
-  function examUrl(page){ return location.href.split("#")[0] + examHash(page); }
-  function loadParams(p){
-    var ids = (p.q||"").split(",").map(Number).filter(function(n){ return byId[n]; });
-    if(!ids.length) return false;
-    EX.ids = ids; EX.qs = ids.map(function(i){ return byId[i]; });
-    EX.e = p.e || newToken();
-    EX.range = /^\d+-\d+$/.test(p.r||"") ? p.r : "";
-    return true;
+  function cleanCode(v){ return (v||"").toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6); }
+  function roomKey(){ return "ivq-room-"+EX.code; }
+  function topic(){ return RELAY + "ivqcomp-" + EX.code.toLowerCase(); }
+  function teamLink(){ return location.href.split("#")[0] + "#/exam/team/" + EX.code; }
+
+  function setDef(ids, range){
+    var good = (ids||[]).filter(function(i){ return byId[i]; });
+    if(!good.length) return false;
+    EX.def = {ids:good, range:range||""}; EX.qs = good.map(function(i){ return byId[i]; });
+    clearTimeout(EX.nfT); EX.notFound = false; return true;
   }
 
   /* ----- routing ----- */
   function leaveExamPage(){
     if(EX.role==="master") stopSpeech();
-    clearInterval(EX.tid); EX.tid = null; clearTimeout(helloTimer); relayClose(); EX.role = null;
+    clearInterval(EX.tid); clearInterval(EX.pollT); clearTimeout(EX.nfT);
+    if(EX.es){ try{ EX.es.close(); }catch(e){} }
+    EX = blank();
   }
   function route(){
-    var r = parseHash(), p = r.path, inExam = p.indexOf("/exam")===0;
+    var h = location.hash.replace(/^#/, "").split("?")[0], parts = h.split("/").filter(Boolean);
+    var inExam = parts[0]==="exam", sub = parts[1]||"", code = (parts[2]||"").toUpperCase();
     leaveExamPage();
     document.body.classList.toggle("inexam", inExam);
-    wrapEl.classList.toggle("wide", p==="/exam/master" || p==="/exam/team");
+    wrapEl.classList.toggle("wide", inExam && (sub==="master"||sub==="team"));
     $("navPractice").setAttribute("aria-current", inExam ? "false" : "page");
     $("navExam").setAttribute("aria-current", inExam ? "page" : "false");
     footerTxt.textContent = inExam ? "Exam mode · the quiz master controls the exam · the team screen follows along" : footerOrig;
     brandSub.textContent = inExam ? "Exam mode · rapid-fire round" : brandOrig;
     window.scrollTo({top:0});
-    if(!inExam){ stopSpeech(); showView("practiceView"); return; }
     stopSpeech();
-    if(p==="/exam/ready" && loadParams(r.params)){ showView("examReady"); renderReady(); return; }
-    if(p==="/exam/master" && loadParams(r.params)){ startRole("master"); return; }
-    if(p==="/exam/team" && loadParams(r.params)){ startRole("team"); return; }
-    showView("examSetup"); exHint();
+    if(!inExam){ showView("practiceView"); return; }
+    if((sub==="master"||sub==="team") && /^[A-Z0-9]{6}$/.test(code)){ startRole(sub, code); return; }
+    if(sub==="new"){ showView("examSetup"); exHint(); return; }
+    showView("examHome"); renderHome();
   }
   window.addEventListener("hashchange", route);
 
-  /* ----- exam setup ----- */
+  /* ----- home: create or open ----- */
+  var joinEl = $("joinCode"), joinErr = $("joinErr");
+  function renderHome(){
+    joinErr.textContent = "";
+    var last = lsGet(LAST_KEY), box = $("hmLast"); box.textContent = "";
+    if(last && /^[A-Z0-9]{6}$/.test(last)){
+      box.appendChild(document.createTextNode("Your last quiz: "));
+      var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = last + " · resume";
+      b.addEventListener("click", function(){ location.hash = "#/exam/master/"+last; });
+      box.appendChild(b);
+    }
+  }
+  function goJoin(role){
+    var c = cleanCode(joinEl.value);
+    if(c.length!==6){ joinErr.textContent = "Enter the full 6-character code."; joinEl.focus(); return; }
+    location.hash = "#/exam/"+role+"/"+c;
+  }
+  joinEl.addEventListener("input", function(){ var v = cleanCode(joinEl.value); if(joinEl.value!==v) joinEl.value = v; joinErr.textContent = ""; });
+  joinEl.addEventListener("keydown", function(ev){ if(ev.key==="Enter") goJoin("team"); });
+  $("hmJoin").addEventListener("click", function(){ goJoin("team"); });
+  $("hmResume").addEventListener("click", function(){ goJoin("master"); });
+  $("hmCreate").addEventListener("click", function(){ location.hash = "#/exam/new"; });
+  $("exBack").addEventListener("click", function(){ location.hash = "#/exam"; });
+  $("mNew").addEventListener("click", function(){ location.hash = "#/exam/new"; });
+  $("mNew2").addEventListener("click", function(){ location.hash = "#/exam/new"; });
+  $("tOther").addEventListener("click", function(){ location.hash = "#/exam"; });
+
+  /* ----- create form ----- */
   var exS = $("exStart"), exE = $("exEnd"), exN = $("exCount"), exErr = $("exErr");
   function exSetErr(msg, which){
     exErr.textContent = msg || "";
@@ -758,16 +834,29 @@ header.top{flex-wrap:wrap}
   function exHint(){
     var s = parseInt(exS.value,10), e = parseInt(exE.value,10), h = $("exHint");
     if(s>=1 && e>=s && e<=MAX){ var n = e-s+1; h.textContent = n+" question"+(n===1?"":"s")+" in this range. Choose 1 – "+n+" for the exam."; exN.max = n; }
-    else h.textContent = "Valid range: 1 – "+MAX+". Questions are drawn at random from the range.";
+    else h.textContent = "Valid range: 1 – "+MAX+".";
+    var box = $("exSeen"); box.textContent = "";
+    if(s>=1 && e>=s && e<=MAX){
+      var seen = seenLoad("exam"), used = 0;
+      for(var k=s;k<=e;k++) if(seen[k]) used++;
+      if(used>0){
+        box.appendChild(document.createTextNode(used+" of these "+(e-s+1)+" were used in earlier quizzes. Unused ones are picked first. "));
+        var rb = document.createElement("button"); rb.type = "button"; rb.className = "chip"; rb.textContent = "Reset history";
+        rb.addEventListener("click", function(){ seenSave("exam", {}); exHint(); });
+        box.appendChild(rb);
+      }
+    }
   }
-  function createExam(s, e, n){
-    var pool = Q.filter(function(q){ return q.id>=s && q.id<=e; });
-    shuffle(pool);
-    EX.ids = pool.slice(0, n).map(function(q){ return q.id; });
-    EX.e = newToken(); EX.range = s+"-"+e;
-    location.hash = examHash("ready");
+  function createQuiz(r){
+    var pool = Q.filter(function(q){ return q.id>=r.s && q.id<=r.e; });
+    var code = genCode(), ids = fairPick(pool, r.n, "exam").map(function(q){ return q.id; });
+    var m = {code:code, seq:1, ids:ids, range:r.s+"-"+r.e, at:Date.now(),
+             s:{phase:"wait", idx:0, paused:false, times:[], marks:[], qAcc:0}};
+    lsSet("ivq-room-"+code, JSON.stringify(m));            // the master screen picks this up and publishes it
+    lsSet(LAST_KEY, code);
+    location.hash = "#/exam/master/"+code;
   }
-  function exSubmit(){ var r = exRead(); if(r) createExam(r.s, r.e, r.n); }
+  function exSubmit(){ var r = exRead(); if(r) createQuiz(r); }
   [exS, exE, exN].forEach(function(el){
     el.addEventListener("input", function(){ exSetErr(""); exHint(); });
     el.addEventListener("keydown", function(ev){ if(ev.key==="Enter") exSubmit(); });
@@ -778,148 +867,144 @@ header.top{flex-wrap:wrap}
     b.addEventListener("click", function(){ exS.value=c[1]; exE.value=c[2]; exSetErr(""); exHint(); exN.focus(); });
     $("exChips").appendChild(b);
   });
-
-  /* ----- ready page ----- */
-  function renderReady(){
-    var n = EX.ids.length, rg = EX.range ? EX.range.split("-") : null;
-    $("rdSub").textContent = n+" question"+(n===1?"":"s")+" drawn at random"+(rg ? " from questions "+rg[0]+" – "+rg[1] : "")+". Open the two screens below.";
-    $("rdMaster").href = examUrl("master"); $("rdTeam").href = examUrl("team");
-  }
-  document.querySelectorAll("[data-copy]").forEach(function(b){
-    b.addEventListener("click", function(){
-      var t = examUrl(b.getAttribute("data-copy")), old = b.textContent;
-      function ok(){ b.textContent = "Copied ✓"; setTimeout(function(){ b.textContent = old; }, 1500); }
-      if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, function(){ window.prompt("Copy this link:", t); });
-      else window.prompt("Copy this link:", t);
-    });
-  });
-  $("rdEdit").addEventListener("click", function(){
-    if(EX.range){ var a = EX.range.split("-"); exS.value = a[0]; exE.value = a[1]; exN.value = EX.ids.length; }
-    location.hash = "#/exam";
-  });
-  $("rdAgain").addEventListener("click", function(){
-    var a = EX.range ? EX.range.split("-").map(Number) : [1, MAX];
-    createExam(a[0], a[1], Math.min(EX.ids.length, a[1]-a[0]+1));
-  });
-  $("mNew").addEventListener("click", function(){ location.hash = "#/exam"; });
-
-  /* ----- transport: same browser (BroadcastChannel/localStorage) + internet relay (ntfy.sh) ----- */
-  var MYID = Math.random().toString(36).slice(2), BC = null, MSGKEY = "ivq-ex-msg", ES = null, helloTimer = null;
-  var RELAY = window.IVQ_RELAY || "https://ntfy.sh/";
-  try{ if("BroadcastChannel" in window) BC = new BroadcastChannel("ivq-exam"); }catch(e){}
-  function topic(){ return RELAY + "ivq26-" + EX.e; }
-  function send(m){
-    if(!EX.role) return;
-    m.e = EX.e; m.src = EX.role; m.from = MYID; m.n = Date.now()+"."+Math.random();
-    try{ if(BC) BC.postMessage(m); }catch(e){}
-    try{ localStorage.setItem(MSGKEY, JSON.stringify(m)); }catch(e){}
-    try{ fetch(topic(), {method:"POST", body:JSON.stringify(m)}).catch(function(){}); }catch(e){}
-  }
-  function relayConnect(){
-    relayClose();
-    if(!window.EventSource) return;
-    try{
-      ES = new EventSource(topic()+"/sse");
-      ES.onopen = function(){ EX.relay = true; updateLinked(); if(EX.role==="team") sayHello(); };
-      ES.onerror = function(){ EX.relay = false; updateLinked(); };
-      ES.onmessage = function(ev){
-        try{ var d = JSON.parse(ev.data); if(d.event==="message" && d.message) onMsg(JSON.parse(d.message)); }catch(x){}
-      };
-    }catch(e){}
-  }
-  function relayClose(){ if(ES){ try{ ES.close(); }catch(e){} ES = null; } EX.relay = false; }
-  if(BC) BC.onmessage = function(ev){ onMsg(ev.data); };
-  window.addEventListener("storage", function(ev){
-    if(ev.key===MSGKEY && ev.newValue){ try{ onMsg(JSON.parse(ev.newValue)); }catch(e){} }
+  $("mCopy").addEventListener("click", function(){
+    var b = $("mCopy"), t = teamLink(), old = "Copy team link";
+    function ok(){ b.textContent = "Copied ✓"; setTimeout(function(){ b.textContent = old; }, 1500); }
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, function(){ window.prompt("Copy this link:", t); });
+    else window.prompt("Copy this link:", t);
   });
 
-  function onMsg(m){
-    if(!EX.role || !m || m.e!==EX.e || m.from===MYID || m.src===EX.role) return;
-    if(EX.role==="master"){
-      if(m.k==="hello"){ EX.linked = true; updateLinked(); send({k:"state", s:snap()}); }
-      else if(m.k==="here"){ EX.linked = true; updateLinked(); }
-    } else if(m.k==="state" && m.s){
-      EX.linked = true; EX.gotState = true;
-      if(m.from!==EX.lastMaster){ EX.lastMaster = m.from; send({k:"here"}); }     // let the master know we're connected
-      applyState(m.s); updateLinked();
-    }
-  }
-  function sayHello(){
-    clearTimeout(helloTimer);
-    if(EX.role!=="team" || EX.gotState || EX.helloTries>=4) return;
-    EX.helloTries++; send({k:"hello"});
-    helloTimer = setTimeout(sayHello, 3000*EX.helloTries);
-  }
-  function updateLinked(){
-    var master = EX.role==="master";
-    var txt = master ? (EX.linked ? "● Team screen connected" : "○ Waiting for team screen")
-                     : (EX.linked ? "● Connected to quiz master" : "○ Looking for quiz master…");
-    var tip = EX.relay ? "Online relay connected: works across devices." : "Online relay not reachable: syncing only works between tabs in the same browser.";
-    document.querySelectorAll(".link-badge").forEach(function(el){ el.className = "link-badge"+(EX.linked ? " on" : ""); el.textContent = txt; el.title = tip; });
-  }
-
-  /* ----- shared state: the quiz master owns it, the team receives it ----- */
+  /* ----- state shared between the screens ----- */
   function running(){ return EX.phase==="run" && !EX.paused; }
   function curMs(){ return EX.qAcc + (running() ? Date.now()-EX.qStart : 0); }
   function sumTimes(){ return EX.times.reduce(function(a,b){ return a+(b||0); }, 0); }
-  function snap(){ return {phase:EX.phase, idx:EX.idx, paused:EX.paused, times:EX.times.slice(), qAcc:curMs()}; }
-  function applyState(s){
-    var changed = (s.phase!==EX.phase || s.idx!==EX.idx);
-    EX.phase = s.phase; EX.idx = s.idx; EX.paused = !!s.paused; EX.times = s.times || []; EX.qAcc = s.qAcc || 0; EX.qStart = Date.now();
-    if(changed) EX.shown = false;
-    render();
-  }
-  function stateKey(){ return "ivq-ex-state-"+EX.e; }
-  function commit(){                       // master only: save, redraw, tell the team
-    try{ var s = snap(); s.at = Date.now(); sessionStorage.setItem(stateKey(), JSON.stringify(s)); }catch(e){}
-    render(); send({k:"state", s:snap()});
-  }
-  function startRole(role){
-    EX.role = role; EX.phase = "wait"; EX.idx = 0; EX.shown = false; EX.paused = false; EX.times = []; EX.qAcc = 0; EX.qStart = Date.now();
-    EX.linked = false; EX.gotState = false; EX.helloTries = 0;
-    if(role==="master"){
-      try{
-        var s = JSON.parse(sessionStorage.getItem(stateKey())||"null");      // survive a page refresh
-        if(s && s.phase){ EX.phase = s.phase; EX.idx = s.idx; EX.paused = !!s.paused; EX.times = s.times||[]; EX.qAcc = s.qAcc||0;
-          if(s.phase==="run" && !s.paused) EX.qAcc += Date.now()-(s.at||Date.now()); }
-      }catch(e){}
+  function snap(){ return {phase:EX.phase, idx:EX.idx, paused:EX.paused, times:EX.times.slice(), marks:EX.marks.slice(), qAcc:curMs()}; }
+  function makeMsg(){ return {code:EX.code, seq:EX.seq, ids:EX.def.ids, range:EX.def.range, at:Date.now(), s:snap()}; }
+
+  // Take in a state message (from storage, the relay, or a poll). Newer sequence numbers win.
+  function ingest(m, sentLocal){
+    if(!EX.code || !m || m.code!==EX.code || !m.s || typeof m.seq!=="number") return;
+    if(!EX.def && !setDef(m.ids, m.range)) return;
+    if(m.seq <= EX.seq) return;
+    var s = m.s, el = 0;
+    if(s.phase==="run" && !s.paused){                        // the clock kept running while we were away
+      el = Math.max(0, Math.min(Date.now()-(sentLocal||Date.now()), 12*3600*1000));
+      if(el < 2500) el = 0;
     }
-    showView(role); updateLinked(); render(); relayConnect();
+    var changed = (s.phase!==EX.phase || s.idx!==EX.idx);
+    EX.seq = m.seq; EX.phase = s.phase; EX.idx = s.idx; EX.paused = !!s.paused;
+    EX.times = s.times || []; EX.marks = s.marks || []; EX.qAcc = (s.qAcc||0) + el; EX.qStart = Date.now();
+    if(changed) EX.shown = false;
+    EX.got = true;
+    if(EX.role==="team") lsSet(roomKey(), JSON.stringify(m));   // keep a local copy for offline reloads
+    render(); updateLinked();
+  }
+
+  /* ----- transport ----- */
+  function publish(m){
+    return fetch(topic(), {method:"POST", body:JSON.stringify(m)}).then(function(r){ return r.ok; }).catch(function(){ return false; });
+  }
+  function pushIfNeeded(){                                    // master: (re)send until the relay has our latest state
+    if(EX.role!=="master" || !EX.def || EX.pubSeq>=EX.seq) return;
+    var m = makeMsg(); if(m.seq!==EX.seq) return;
+    publish(m).then(function(ok){ if(ok && m.seq>EX.pubSeq){ EX.pubSeq = m.seq; updateLinked(); } });
+  }
+  function relayLine(line){
+    var d; try{ d = JSON.parse(line); }catch(e){ return; }
+    if(!d) return;
+    if(d.time && (d.event==="open" || d.event==="keepalive")) EX.skew = d.time*1000 - Date.now();
+    if(d.event==="message" && d.message){ var m; try{ m = JSON.parse(d.message); }catch(e){ return; } ingest(m, d.time ? d.time*1000 - EX.skew : Date.now()); }
+  }
+  function relayConnect(){
+    if(!window.EventSource) return;
+    var code = EX.code;
+    try{
+      var es = new EventSource(topic()+"/sse?since=all"); EX.es = es;
+      es.onopen = function(){ if(EX.code!==code) return; EX.relay = true; updateLinked(); pushIfNeeded(); };
+      es.onerror = function(){ if(EX.code!==code) return; EX.relay = false; updateLinked(); };
+      es.onmessage = function(ev){ if(EX.code===code) relayLine(ev.data); };
+    }catch(e){}
+  }
+  function pollRelay(){                                       // safety net in case the live connection is blocked
+    var code = EX.code; if(!code) return;
+    fetch(topic()+"/json?poll=1&since=all").then(function(r){ return r.text(); }).then(function(t){
+      if(EX.code!==code) return;
+      t.split("\n").forEach(function(l){ if(l.trim()) relayLine(l); });
+      pushIfNeeded();
+    }).catch(function(){});
+  }
+  window.addEventListener("storage", function(ev){            // other tabs of this browser
+    if(!EX.code || ev.key!==roomKey() || !ev.newValue) return;
+    try{ var m = JSON.parse(ev.newValue); ingest(m, m.at); }catch(e){}
+  });
+  function updateLinked(){
+    var txt, on = false;
+    if(EX.role==="master"){
+      if(!EX.relay) txt = "○ Offline: will sync when connected";
+      else if(EX.pubSeq<EX.seq) txt = "○ Syncing…";
+      else { txt = "● Live: team screens update automatically"; on = true; }
+    } else {
+      if(EX.relay){ txt = "● Live"; on = true; }
+      else txt = EX.got ? "○ Offline: showing the last update" : "○ Connecting…";
+    }
+    document.querySelectorAll(".link-badge").forEach(function(el){ el.className = "link-badge"+(on ? " on" : ""); el.textContent = txt; });
+  }
+
+  function startRole(role, code){
+    EX.role = role; EX.code = code;
+    showView(role);
+    if(role==="master") lsSet(LAST_KEY, code);
+    var saved = lsGet(roomKey());                              // instant start from this browser's copy
+    if(saved){ try{ var m = JSON.parse(saved); ingest(m, m.at); }catch(e){} }
+    $("mCode").textContent = code; $("mCode2").textContent = code; $("tCode").textContent = code;
+    render(); updateLinked();
+    relayConnect(); pollRelay();
+    EX.pollT = setInterval(pollRelay, 8000);
     EX.tid = setInterval(tickClock, 250);
-    if(role==="team") sayHello(); else send({k:"state", s:snap()});
+    if(!EX.def) EX.nfT = setTimeout(function(){ if(!EX.def){ EX.notFound = true; render(); } }, 10000);
+    pushIfNeeded();
   }
   function render(){ if(EX.role==="master") masterRender(); else if(EX.role==="team") teamRender(); }
 
   /* ----- clock ----- */
   function tickClock(){
     if(!EX.role) return;
-    var p = EX.role==="master" ? "m" : "t", live = EX.phase==="run";
+    var p = EX.role==="master" ? "m" : "t", live = EX.phase==="run" && !!EX.def;
     $(p+"QTime").textContent = fmt(live ? curMs() : 0);
     $(p+"Total").textContent = fmt(sumTimes() + (live ? curMs() : 0));
     $(p+"QTime").classList.toggle("paused", EX.paused);
   }
 
-  /* ----- quiz master actions ----- */
-  function mStart(){ EX.phase = "run"; EX.idx = 0; EX.times = []; EX.qAcc = 0; EX.paused = false; EX.qStart = Date.now(); EX.shown = false; commit(); speakIfOn(); }
+  /* ----- quiz master actions (every action publishes a new state) ----- */
+  function commit(){
+    EX.seq++;
+    var m = makeMsg(); lsSet(roomKey(), JSON.stringify(m));
+    render(); updateLinked();
+    publish(m).then(function(ok){ if(ok && m.seq>EX.pubSeq){ EX.pubSeq = m.seq; updateLinked(); } });
+  }
+  function mStart(){ if(!EX.def) return; EX.phase = "run"; EX.idx = 0; EX.times = []; EX.marks = []; EX.qAcc = 0; EX.paused = false; EX.qStart = Date.now(); EX.shown = false; commit(); speakIfOn(); }
   function mMove(i){
     var n = EX.qs.length; if(EX.phase!=="run") return;
     i = Math.max(0, Math.min(n, i)); if(i===EX.idx) return;
-    EX.times[EX.idx] = curMs();                       // bank the time of the question we're leaving
+    EX.times[EX.idx] = curMs();                                // bank the time of the question we're leaving
     EX.idx = i; EX.shown = false; EX.paused = false; EX.qStart = Date.now();
     if(i>=n){ EX.phase = "done"; EX.qAcc = 0; }
     else { EX.qAcc = EX.times[i]||0; EX.times[i] = 0; }
     commit(); if(i<n) speakIfOn();
   }
+  function mMark(ok){ if(EX.phase!=="run") return; EX.marks[EX.idx] = ok; mMove(EX.idx+1); }
+  function mBack(){ if(EX.phase!=="run" || EX.idx===0) return; EX.marks[EX.idx-1] = null; mMove(EX.idx-1); }
   function mPause(){
     if(EX.phase!=="run") return;
     if(running()){ EX.qAcc += Date.now()-EX.qStart; EX.paused = true; } else { EX.paused = false; EX.qStart = Date.now(); }
     commit();
   }
-  function mAgain(){ EX.phase = "wait"; EX.idx = 0; EX.times = []; EX.qAcc = 0; EX.paused = false; EX.shown = false; commit(); }
+  function mAgain(){ EX.phase = "wait"; EX.idx = 0; EX.times = []; EX.marks = []; EX.qAcc = 0; EX.paused = false; EX.shown = false; commit(); }
   function speakIfOn(){ var q = EX.qs[EX.idx]; if(q && TTS.on && voiceReady()) speakQuestion(q); }
   $("mStart").addEventListener("click", mStart);
-  $("mNext").addEventListener("click", function(){ mMove(EX.idx+1); });
-  $("mPrev").addEventListener("click", function(){ mMove(EX.idx-1); });
+  $("mRight").addEventListener("click", function(){ mMark(true); });
+  $("mWrong").addEventListener("click", function(){ mMark(false); });
+  $("mPrev").addEventListener("click", mBack);
   $("mPause").addEventListener("click", mPause);
   $("mAgain").addEventListener("click", mAgain);
   $("mReplay").addEventListener("click", function(){
@@ -927,23 +1012,31 @@ header.top{flex-wrap:wrap}
     if(TTS.cur===q.id) stopSpeech(); else { if(!TTS.on){ TTS.on = true; store("ivq-voice","1"); syncVoiceUI(); } speakQuestion(q); }
   });
 
-  /* ----- local-only "Show answer" (each screen has its own; never synced) ----- */
-  function syncShown(p){
-    $(p+"Ans").classList.toggle("open", EX.shown);
-    $(p+"Ans").setAttribute("aria-hidden", EX.shown ? "false" : "true");
-    $(p+"Show").setAttribute("aria-expanded", EX.shown ? "true" : "false");
-    $(p+"Show").textContent = EX.shown ? "Hide answer" : "Show answer";
+  /* ----- local-only "Show answer" on the team screen ----- */
+  function syncShown(){
+    $("tAns").classList.toggle("open", EX.shown);
+    $("tAns").setAttribute("aria-hidden", EX.shown ? "false" : "true");
+    $("tShow").setAttribute("aria-expanded", EX.shown ? "true" : "false");
+    $("tShow").textContent = EX.shown ? "Hide answer" : "Show answer";
   }
-  function toggleAnswer(){ if(EX.phase!=="run") return; EX.shown = !EX.shown; syncShown(EX.role==="master" ? "m" : "t"); }
-  $("mShow").addEventListener("click", toggleAnswer); $("tShow").addEventListener("click", toggleAnswer);
+  function toggleAnswer(){ if(EX.role!=="team" || EX.phase!=="run") return; EX.shown = !EX.shown; syncShown(); }
+  $("tShow").addEventListener("click", toggleAnswer);
 
   /* ----- rendering ----- */
+  function lookingText(){
+    return EX.notFound ? "Can't find a quiz with code "+EX.code+". Check the code, or make sure the quiz master has created it (quizzes are kept for about 12 hours). Still checking…"
+                       : "Looking for quiz "+EX.code+"…";
+  }
   function masterRender(){
-    var n = EX.qs.length, ph = EX.phase;
+    var has = !!EX.def, n = has ? EX.qs.length : 0, ph = has ? EX.phase : "wait";
     $("mGate").style.display = ph==="wait" ? "block" : "none";
     $("mRun").style.display = ph==="run" ? "block" : "none";
     $("mDone").style.display = ph==="done" ? "block" : "none";
-    if(ph==="wait"){ $("mGateSub").textContent = n+" question"+(n===1?"":"s")+" ready. When you press Start, the first question appears here and on the team screen. You control every step from here."; return; }
+    if(ph==="wait"){
+      $("mStart").disabled = !has;
+      $("mGateSub").textContent = has ? n+" question"+(n===1?"":"s")+" ready. Press Start and the first question appears here and on every team screen. You mark each answer correct or wrong to move on." : lookingText();
+      return;
+    }
     if(ph==="done"){ renderResults("mResults"); return; }
     var q = EX.qs[EX.idx];
     $("mPos").textContent = "Question "+(EX.idx+1)+" of "+n;
@@ -953,30 +1046,29 @@ header.top{flex-wrap:wrap}
     fill($("mQ"), q.question, "q", "ur"); fill($("mA"), q.answer, "a", "both");
     $("mReplay").innerHTML = (TTS.cur===q.id) ? ICON.stop : ICON.spk;
     $("mPrev").disabled = EX.idx===0;
-    $("mNext").textContent = EX.idx===n-1 ? "Finish exam ✓" : "Next question →";
     $("mPause").textContent = EX.paused ? "Resume" : "Pause";
-    syncShown("m"); tickClock();
+    tickClock();
   }
   function teamRender(){
-    var n = EX.qs.length, ph = EX.phase;
+    var has = !!EX.def, ph = has ? EX.phase : "wait";
     $("tGate").style.display = ph==="wait" ? "block" : "none";
     $("tRun").style.display = ph==="run" ? "block" : "none";
     $("tDone").style.display = ph==="done" ? "block" : "none";
-    if(ph==="wait"){ $("tGateSub").textContent = EX.gotState ? "Connected. Waiting for the quiz master to press Start…" : "Waiting for the quiz master. Open the quiz master screen and press Start."; return; }
+    if(ph==="wait"){ $("tGateSub").textContent = has ? "Quiz found. Waiting for the quiz master to press Start. This screen will move on its own." : lookingText(); return; }
     if(ph==="done"){ renderResults("tResults"); return; }
-    var q = EX.qs[EX.idx];
-    $("tPos").textContent = (EX.idx+1)+" / "+n;
-    $("tNum").textContent = "Question "+(EX.idx+1); $("tOrig").textContent = "Bank Q"+q.id;
+    var q = EX.qs[EX.idx], n = EX.qs.length;
     $("tBar").style.width = (EX.idx/n*100)+"%";
     fill($("tQ"), q.question, "q", "en"); fill($("tA"), q.answer, "a", "both");
-    syncShown("t"); tickClock();
+    syncShown(); tickClock();
   }
   function renderResults(id){
-    var n = EX.qs.length, total = sumTimes(), max = 0, maxI = -1, box = $(id); box.textContent = "";
+    var showNum = (id==="mResults");
+    var n = EX.qs.length, total = sumTimes(), max = 0, maxI = -1, right = 0, box = $(id); box.textContent = "";
     EX.times.forEach(function(t,i){ if((t||0)>max){ max = t; maxI = i; } });
+    EX.marks.forEach(function(m){ if(m===true) right++; });
     var sub = document.createElement("p"); sub.textContent = "All "+n+" question"+(n===1?"":"s")+" completed."; box.appendChild(sub);
     var st = document.createElement("div"); st.className = "stats";
-    [[fmt(total),"Total time"],[fmt(n?total/n:0),"Average per question"],[fmt(max),"Slowest question"]].forEach(function(x){
+    [[right+" / "+n,"Correct"],[fmt(total),"Total time"],[fmt(n?total/n:0),"Average per question"]].forEach(function(x){
       var d = document.createElement("div"); d.className = "stat"; var b = document.createElement("b"); b.textContent = x[0]; var s = document.createElement("span"); s.textContent = x[1];
       d.appendChild(b); d.appendChild(s); st.appendChild(d);
     });
@@ -984,10 +1076,11 @@ header.top{flex-wrap:wrap}
     var list = document.createElement("div"); list.className = "tlist";
     EX.qs.forEach(function(q,i){
       var row = document.createElement("div"); row.className = "tr"+(i===maxI && n>1 ? " slow" : "");
-      var a = document.createElement("span"); a.className = "tn"; a.textContent = (i+1)+".";
+      if(showNum){ var a = document.createElement("span"); a.className = "tn"; a.textContent = (i+1)+"."; row.appendChild(a); }
+      var mk = document.createElement("span"); mk.className = "mk"+(EX.marks[i]===true ? " ok" : EX.marks[i]===false ? " no" : ""); mk.textContent = EX.marks[i]===true ? "✓" : EX.marks[i]===false ? "✗" : "–";
       var b = document.createElement("span"); b.className = "tq"; b.textContent = q.question.en; b.title = q.question.en;
       var c = document.createElement("span"); c.className = "tt"; c.textContent = fmt(EX.times[i]||0);
-      row.appendChild(a); row.appendChild(b); row.appendChild(c); list.appendChild(row);
+      row.appendChild(mk); row.appendChild(b); row.appendChild(c); list.appendChild(row);
     });
     box.appendChild(list);
   }
@@ -997,14 +1090,16 @@ header.top{flex-wrap:wrap}
     if(!EX.role || ev.ctrlKey || ev.metaKey || ev.altKey) return;
     var t = ev.target; if(t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
     var k = ev.key;
-    if(k==="a"||k==="A"){ ev.preventDefault(); toggleAnswer(); return; }
-    if(EX.role!=="master") return;
-    if(k==="ArrowRight"){ ev.preventDefault(); mMove(EX.idx+1); }
-    else if(k==="ArrowLeft"){ ev.preventDefault(); mMove(EX.idx-1); }
+    if(EX.role==="team"){ if(k==="a"||k==="A"){ ev.preventDefault(); toggleAnswer(); } return; }
+    if(k==="c"||k==="C"){ ev.preventDefault(); mMark(true); }
+    else if(k==="w"||k==="W"){ ev.preventDefault(); mMark(false); }
+    else if(k==="ArrowLeft"){ ev.preventDefault(); mBack(); }
     else if(k==="p"||k==="P"){ ev.preventDefault(); mPause(); }
   });
 
   route();
+
+  })();
 })();
 </script>
 </body>
