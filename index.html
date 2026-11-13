@@ -1144,6 +1144,13 @@
         height: min(56vh, 470px);
         object-fit: contain;
       }
+      .rc-row{display:grid;grid-template-columns:1fr minmax(210px,260px);gap:16px;align-items:start}
+      .rc-row .gallery{margin-bottom:0;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+      .rc-row .gallery img{height:170px}
+      .rc-row .gallery.one img{height:min(44vh,360px)}
+      .rc-row .pc-name{margin:0}
+      #pcGuessView .enav{margin-top:14px}
+      @media(max-width:720px){.rc-row{grid-template-columns:1fr}}
       .lightbox {
         position: fixed;
         inset: 0;
@@ -1174,7 +1181,8 @@
         <nav class="nav" aria-label="Mode">
           <a href="#/" id="navPractice">Practice</a
           ><a href="#/exam" id="navExam">Exam</a
-          ><a href="#/pictorial" id="navPictorial">Pictorial</a>
+          ><a href="#/pictorial" id="navPictorial">Pictorial</a
+          ><a href="#/recall" id="navRecall">Recall</a>
         </nav>
         <button
           class="icon-btn"
@@ -1693,6 +1701,19 @@
               >
                 Spin again ↻
               </button>
+            </div>
+          </div>
+          <div id="pcGuessView" style="display: none">
+            <div class="rc-row">
+              <div class="gallery" id="pcGGallery"></div>
+              <aside class="card pc-name">
+                <div class="lab">Picture <span id="pcGCount">1</span> · name the place</div>
+                <div class="nm hid" id="pcGName">• • • • •</div>
+                <button type="button" class="btn abtn" id="pcGShow" aria-expanded="false">Show name</button>
+              </aside>
+            </div>
+            <div class="enav">
+              <button class="btn primary" id="pcGNext" type="button">Next random picture ↻</button>
             </div>
           </div>
           <div class="lightbox" id="pcBox" style="display: none">
@@ -9532,7 +9553,8 @@
               parts = h.split("/").filter(Boolean);
             var top = parts[0],
               inExam = top === "exam",
-              inPic = top === "pictorial";
+              inRecall = top === "recall",
+              inPic = top === "pictorial" || inRecall;
             var sub = parts[1] || "",
               code = (parts[2] || "").toUpperCase();
             leaveExamPage();
@@ -9551,18 +9573,26 @@
             );
             $("navPictorial").setAttribute(
               "aria-current",
-              inPic ? "page" : "false",
+              inPic && !inRecall ? "page" : "false",
+            );
+            $("navRecall").setAttribute(
+              "aria-current",
+              inRecall ? "page" : "false",
             );
             footerTxt.textContent = inExam
               ? "Exam mode · the quiz master controls the exam · the team screen follows along"
-              : inPic
-                ? "Pictorial round · spin the wheel, study the pictures, then answer the questions"
-                : footerOrig;
+              : inRecall
+                ? "Recall · random pictures, name the place, check, repeat"
+                : inPic
+                  ? "Pictorial round · spin the wheel, study the pictures, then answer the questions"
+                  : footerOrig;
             brandSub.textContent = inExam
               ? "Exam mode · rapid-fire round"
-              : inPic
-                ? "Pictorial round"
-                : brandOrig;
+              : inRecall
+                ? "Picture recall"
+                : inPic
+                  ? "Pictorial round"
+                  : brandOrig;
             window.scrollTo({ top: 0 });
             stopSpeech();
             if (inPic) {
@@ -10544,13 +10574,14 @@
             SPIN_V = 9;
           cv.width = cv.height = W;
           function pcActive() {
-            return /^#\/pictorial/.test(location.hash);
+            return /^#\/(pictorial|recall)/.test(location.hash);
           }
           function pcStage(n) {
             stage = n;
             $("pcLoad").style.display = n === "load" ? "block" : "none";
             $("pcWheelView").style.display = n === "wheel" ? "block" : "none";
             $("pcResult").style.display = n === "result" ? "block" : "none";
+            $("pcGuessView").style.display = n === "guess" ? "block" : "none";
           }
 
           /* ----- loading the places ----- */
@@ -10644,6 +10675,7 @@
               im.src = p.images[0]; // the first picture of each folder goes on the wheel
             });
             progress();
+            if (isRecall()) enterGuess();
           }
           function progress() {
             $("pcProg").textContent =
@@ -11003,6 +11035,77 @@
           $("pcBack").addEventListener("click", backToWheel);
           $("pcAgain").addEventListener("click", backToWheel);
 
+          /* ----- picture guess: random place, no wheel, endless ----- */
+          var gBag = [],
+            gLast = -1,
+            gCur = -1,
+            gCount = 0,
+            gShown = false;
+          function gRefill() {
+            gBag = P.map(function (_, i) {
+              return i;
+            });
+            for (var i = gBag.length - 1; i > 0; i--) {
+              var j = Math.floor(Math.random() * (i + 1)),
+                t = gBag[i];
+              gBag[i] = gBag[j];
+              gBag[j] = t;
+            }
+            if (gBag.length > 1 && gBag[gBag.length - 1] === gLast) {
+              var k = Math.floor(Math.random() * (gBag.length - 1)),
+                u = gBag[k];
+              gBag[k] = gBag[gBag.length - 1];
+              gBag[gBag.length - 1] = u; // never show the same place twice in a row
+            }
+          }
+          function gSyncName() {
+            var el = $("pcGName");
+            el.textContent = gShown && P[gCur] ? P[gCur].name : "• • • • •";
+            el.classList.toggle("hid", !gShown);
+            $("pcGShow").textContent = gShown ? "Hide name" : "Show name";
+            $("pcGShow").setAttribute("aria-expanded", gShown ? "true" : "false");
+          }
+          function gNext() {
+            if (!P.length) return;
+            if (!gBag.length) gRefill(); // every place seen once -> reshuffle, carry on forever
+            gCur = gBag.pop();
+            gLast = gCur;
+            gCount++;
+            gShown = false;
+            $("pcGCount").textContent = gCount;
+            var p = P[gCur],
+              g = $("pcGGallery");
+            g.textContent = "";
+            g.className = "gallery" + (p.images.length === 1 ? " one" : "");
+            p.images.forEach(function (u) {
+              var im = document.createElement("img");
+              im.src = u;
+              im.alt = "Picture of the place";
+              im.addEventListener("click", function () {
+                var b = $("pcBox");
+                b.firstChild.src = u;
+                b.style.display = "flex";
+              });
+              g.appendChild(im);
+            });
+            gSyncName();
+            window.scrollTo({ top: 0 });
+          }
+          function isRecall() {
+            return /^#\/recall/.test(location.hash);
+          }
+          function enterGuess() {
+            gCount = 0;
+            gBag = [];
+            pcStage("guess");
+            gNext();
+          }
+          $("pcGNext").addEventListener("click", gNext);
+          $("pcGShow").addEventListener("click", function () {
+            gShown = !gShown;
+            gSyncName();
+          });
+
           /* ----- entering / leaving the page ----- */
           function pcLeave() {
             cancelAnimationFrame(raf);
@@ -11016,7 +11119,14 @@
           function pcRoute() {
             if (pcActive()) {
               if (!tried) loadManifest();
-              else if (stage === "wheel") {
+              else if (isRecall()) {
+                if (P.length >= 2 && stage !== "guess") enterGuess();
+              } else if (stage === "guess") {
+                state = "idle";
+                pcStage("wheel");
+                updateSpinBtn();
+                draw();
+              } else if (stage === "wheel") {
                 state = "idle";
                 updateSpinBtn();
                 draw();
