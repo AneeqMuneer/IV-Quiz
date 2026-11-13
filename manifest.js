@@ -120,7 +120,10 @@ window.IVQ_PICTURES = [
  {
   "name": "Aga Khan University",
   "images": [
-   "pictures/Aga%20Khan%20University/Aga%20Khan%20University.jpeg"
+   "pictures/Aga%20Khan%20University/Aga%20Khan%20University%201.jpeg",
+   "pictures/Aga%20Khan%20University/Aga%20Khan%20University%202.jpeg",
+   "pictures/Aga%20Khan%20University/Aga%20Khan%20University%203.jpeg",
+   "pictures/Aga%20Khan%20University/Aga%20Khan%20University%204.jpeg"
   ],
   "qtxt": ""
  },
@@ -168,7 +171,7 @@ window.IVQ_PICTURES = [
  {
   "name": "Global Encounters Camps",
   "images": [
-   "pictures/Global%20Encounters%20Camps/Global%20Encounters%20Camps.png"
+   "pictures/Global%20Encounters%20Camps/Global%20Encounters%20Camps.jpeg"
   ],
   "qtxt": ""
  },
@@ -282,7 +285,10 @@ window.IVQ_PICTURES = [
  {
   "name": "University Of Central Asia",
   "images": [
-   "pictures/University%20Of%20Central%20Asia/University%20Of%20Central%20Asia.jpeg"
+   "pictures/University%20Of%20Central%20Asia/University%20Of%20Central%20Asia%201.jpeg",
+   "pictures/University%20Of%20Central%20Asia/University%20Of%20Central%20Asia%202.jpeg",
+   "pictures/University%20Of%20Central%20Asia/University%20Of%20Central%20Asia%203.jpeg",
+   "pictures/University%20Of%20Central%20Asia/University%20Of%20Central%20Asia%204.jpeg"
   ],
   "qtxt": ""
  }
