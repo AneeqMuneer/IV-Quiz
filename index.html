@@ -1074,6 +1074,13 @@
         margin: 0 0 8px;
       }
 
+      .pc-body{display:grid;grid-template-columns:minmax(200px,260px) 1fr;gap:16px;align-items:start;margin:16px 0}
+      .pc-body .ecard{margin:0}
+      @media(max-width:720px){.pc-body{grid-template-columns:1fr}}
+      .pc-name{text-align:center;padding:18px 14px}
+      .pc-name .lab{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;opacity:.7;margin-bottom:8px}
+      .pc-name .nm{font-size:1.3rem;font-weight:700;min-height:3.2em;display:flex;align-items:center;justify-content:center;margin-bottom:12px;overflow-wrap:anywhere}
+      .pc-name .nm.hid{letter-spacing:.35em;opacity:.45}
       .wheel-wrap {
         position: relative;
         display: flex;
@@ -1627,6 +1634,12 @@
           </div>
           <div id="pcResult" style="display: none">
             <div class="gallery" id="pcGallery"></div>
+            <div class="pc-body">
+            <aside class="card pc-name">
+              <div class="lab">Name the place</div>
+              <div class="nm hid" id="pcName">• • • • •</div>
+              <button type="button" class="btn abtn" id="pcShowName" aria-expanded="false">Show name</button>
+            </aside>
             <article class="card ecard">
               <div class="qhead"><span class="pos" id="pcStep"></span></div>
               <div id="pcQ"></div>
@@ -1647,6 +1660,7 @@
                 </div>
               </div>
             </article>
+            </div>
             <div class="enav">
               <button class="btn ghost" id="pcBack" type="button">
                 ← Back to wheel
@@ -10494,8 +10508,28 @@
           }
 
           /* ----- loading the places ----- */
+          var PD = null;
+          function normK(x) {
+            return String(x || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+          }
+          function loadPD() {
+            var s = document.createElement("script");
+            s.src = "pictorial.js?t=" + Date.now();
+            s.onload = function () {
+              var d = window.IVQ_PICTORIAL;
+              if (!d || !d.places) return;
+              PD = {};
+              d.places.forEach(function (pl) {
+                [pl.name].concat(pl.aliases || []).forEach(function (k) {
+                  if (!PD[normK(k)]) PD[normK(k)] = pl;
+                });
+              });
+            };
+            document.head.appendChild(s);
+          }
           function loadManifest() {
             tried = true;
+            loadPD();
             pcStage("load");
             $("pcHelp").textContent = "";
             $("pcLoadMsg").textContent = "Looking for the pictures folder…";
@@ -10797,9 +10831,49 @@
               return x.q;
             });
           }
+          var usedQ = {};
+          function pickQs(p) {
+            var list = [];
+            if (String(p.qtxt || "").trim()) list = parseQs(p.qtxt); // a questions.txt in the folder wins
+            else {
+              var pl = PD && PD[normK(p.name)];
+              if (pl) list = pl.questions;
+            }
+            // clean + not-yet-shown questions first, then random
+            var ranked = list
+              .map(function (x) {
+                var k = p.name + "|" + (x.id || x.q);
+                return { x: x, k: k, r: Math.random() + (x.reveals ? 2 : 0) + (usedQ[k] ? 1 : 0) };
+              })
+              .sort(function (a, b) {
+                return a.r - b.r;
+              })
+              .slice(0, 3);
+            ranked.forEach(function (o) {
+              usedQ[o.k] = 1;
+            });
+            return ranked.map(function (o) {
+              return { q: o.x.q, a: o.x.a };
+            });
+          }
+          var nameShown = false;
+          function syncName() {
+            var el = $("pcName");
+            el.textContent = nameShown && P[sel] ? P[sel].name : "• • • • •";
+            el.classList.toggle("hid", !nameShown);
+            $("pcShowName").textContent = nameShown ? "Hide name" : "Show name";
+            $("pcShowName").setAttribute("aria-expanded", nameShown ? "true" : "false");
+          }
+          $("pcShowName").addEventListener("click", function () {
+            nameShown = !nameShown;
+            syncName();
+          });
           function showResult(i) {
             var p = P[i];
-            qs = parseQs(p.qtxt).slice(0, 3);
+            sel = i;
+            nameShown = false;
+            syncName();
+            qs = pickQs(p);
             step = 0;
             shown = false;
             var g = $("pcGallery");
@@ -10840,7 +10914,7 @@
             if (!qs.length) {
               $("pcStep").textContent = "";
               $("pcQ").textContent =
-                "No questions found for this place yet. Add a questions.txt file to its folder (lines starting with Q: and A:).";
+                "No questions found for this place yet. Check that its folder name matches a place in pictorial.js, or add a questions.txt to the folder (lines starting with Q: and A:).";
               $("pcShow").style.display = "none";
               $("pcAns").classList.remove("open");
               $("pcNext").style.display = "none";
