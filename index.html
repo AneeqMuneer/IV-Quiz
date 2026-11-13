@@ -1191,8 +1191,9 @@
           <section id="setup" class="card hero">
             <h2>Build your practice round</h2>
             <p class="sub">
-              Choose the first and last question number. You'll get up to 20
-              random questions from that range, in shuffled order.
+              Choose the first and last question number, and how many questions
+              you want (20 if left blank). They're picked at random from that
+              range, in shuffled order.
             </p>
             <div class="fields">
               <div class="field">
@@ -1216,6 +1217,17 @@
                   min="1"
                   max="275"
                   placeholder="275"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="field">
+                <label for="count">How many?</label
+                ><input
+                  id="count"
+                  type="number"
+                  inputmode="numeric"
+                  min="1"
+                  placeholder="20"
                   autocomplete="off"
                 />
               </div>
@@ -8547,7 +8559,7 @@
         var $ = function (id) {
           return document.getElementById(id);
         };
-        var state = { lang: "both", start: 1, end: MAX, picked: [], shown: {} };
+        var state = { lang: "both", start: 1, end: MAX, per: PER, picked: [], shown: {} };
 
         /* ---------- theme ---------- */
         var root = document.documentElement;
@@ -8680,6 +8692,7 @@
         /* ---------- setup ---------- */
         var startEl = $("start"),
           endEl = $("end"),
+          countEl = $("count"),
           errEl = $("err");
         function setErr(msg, which) {
           errEl.textContent = msg || "";
@@ -8688,6 +8701,7 @@
             which === "start" || which === "both",
           );
           endEl.classList.toggle("bad", which === "end" || which === "both");
+          countEl.classList.toggle("bad", which === "count");
         }
         function readRange() {
           var sRaw = startEl.value.trim(),
@@ -8717,20 +8731,47 @@
             setErr("Start can't be greater than end.", "both");
             return null;
           }
+          var cRaw = countEl.value.trim(),
+            avail = e - s + 1,
+            n = PER;
+          if (cRaw !== "") {
+            n = Number(cRaw);
+            if (!Number.isInteger(n) || n < 1) {
+              setErr(
+                "The number of questions must be a whole number, at least 1.",
+                "count",
+              );
+              return null;
+            }
+            if (n > avail) {
+              setErr(
+                "That range only has " +
+                  avail +
+                  " question" +
+                  (avail === 1 ? "" : "s") +
+                  ". Choose " +
+                  avail +
+                  " or fewer.",
+                "count",
+              );
+              return null;
+            }
+          }
           setErr("");
-          return { s: s, e: e };
+          return { s: s, e: e, n: n };
         }
         function updateHint() {
           var s = parseInt(startEl.value, 10),
             e = parseInt(endEl.value, 10),
-            h = $("hint");
+            h = $("hint"),
+            want = parseInt(countEl.value, 10) >= 1 ? parseInt(countEl.value, 10) : PER;
           if (s >= 1 && e >= s && e <= MAX) {
             var n = e - s + 1;
             h.textContent =
-              n > PER
+              n > want
                 ? n +
                   " questions in range — " +
-                  PER +
+                  want +
                   " will be picked at random."
                 : "Only " +
                   n +
@@ -8741,9 +8782,9 @@
             h.textContent =
               "Valid range: 1 – " +
               MAX +
-              ". Ranges smaller than " +
+              ". Leave “How many?” blank for " +
               PER +
-              " use every question in the range.";
+              " questions; smaller ranges use every question.";
           }
         }
         startEl.addEventListener("input", function () {
@@ -8754,7 +8795,11 @@
           setErr("");
           updateHint();
         });
-        [startEl, endEl].forEach(function (el) {
+        countEl.addEventListener("input", function () {
+          setErr("");
+          updateHint();
+        });
+        [startEl, endEl, countEl].forEach(function (el) {
           el.addEventListener("keydown", function (e) {
             if (e.key === "Enter") begin();
           });
@@ -9135,7 +9180,7 @@
           var pool = Q.filter(function (q) {
             return q.id >= state.start && q.id <= state.end;
           });
-          state.picked = fairPick(pool, PER, "practice");
+          state.picked = fairPick(pool, state.per, "practice");
           state.shown = {};
         }
         function begin() {
@@ -9143,6 +9188,7 @@
           if (!r) return;
           state.start = r.s;
           state.end = r.e;
+          state.per = r.n;
           pick();
           $("setup").style.display = "none";
           $("quiz").style.display = "block";
@@ -9243,7 +9289,7 @@
           });
           var n = state.end - state.start + 1;
           $("doneSub").textContent =
-            n > PER
+            n > state.per
               ? "You covered " +
                 total +
                 " random questions from " +
