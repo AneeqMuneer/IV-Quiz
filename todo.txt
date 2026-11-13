@@ -1,0 +1,8 @@
+1. Make pictorial.json 
+2. Make the pictorial round
+3. Make pdf with images
+4. Update picture
+    a. GE
+    b. GE Camps
+    c. Serena Hotels
+5. Share all images on whatsapp
