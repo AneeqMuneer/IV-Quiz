@@ -1201,7 +1201,7 @@
             <p class="sub">
               Choose the first and last question number, and how many questions
               you want (20 if left blank). They're picked at random from that
-              range, in shuffled order.
+              range, in shuffled order. You can also leave out a sub-range.
             </p>
             <div class="fields">
               <div class="field">
@@ -1238,6 +1238,16 @@
                   placeholder="20"
                   autocomplete="off"
                 />
+              </div>
+            </div>
+            <div class="fields">
+              <div class="field">
+                <label for="exFrom">Exclude from (optional)</label
+                ><input id="exFrom" type="number" inputmode="numeric" min="1" max="275" placeholder="e.g. 90" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="exTo">Exclude to</label
+                ><input id="exTo" type="number" inputmode="numeric" min="1" max="275" placeholder="e.g. 170" autocomplete="off" />
               </div>
             </div>
             <p class="hint" id="hint">
@@ -8580,7 +8590,7 @@
         var $ = function (id) {
           return document.getElementById(id);
         };
-        var state = { lang: "both", start: 1, end: MAX, per: PER, picked: [], shown: {} };
+        var state = { lang: "both", start: 1, end: MAX, per: PER, xf: null, xt: null, picked: [], shown: {} };
 
         /* ---------- theme ---------- */
         var root = document.documentElement;
@@ -8714,7 +8724,20 @@
         var startEl = $("start"),
           endEl = $("end"),
           countEl = $("count"),
+          exFromEl = $("exFrom"),
+          exToEl = $("exTo"),
           errEl = $("err");
+        function inEx(id, xf, xt) {
+          return xf != null && id >= xf && id <= xt;
+        }
+        function availCount(s, e, xf, xt) {
+          var c = 0;
+          for (var i = s; i <= e; i++) if (!inEx(i, xf, xt)) c++;
+          return c;
+        }
+        function exLabel(xf, xt) {
+          return xf === xt ? "" + xf : xf + "–" + xt;
+        }
         function setErr(msg, which) {
           errEl.textContent = msg || "";
           startEl.classList.toggle(
@@ -8723,6 +8746,8 @@
           );
           endEl.classList.toggle("bad", which === "end" || which === "both");
           countEl.classList.toggle("bad", which === "count");
+          exFromEl.classList.toggle("bad", which === "excl");
+          exToEl.classList.toggle("bad", which === "excl");
         }
         function readRange() {
           var sRaw = startEl.value.trim(),
@@ -8752,9 +8777,39 @@
             setErr("Start can't be greater than end.", "both");
             return null;
           }
+          var xfRaw = exFromEl.value.trim(),
+            xtRaw = exToEl.value.trim(),
+            xf = null,
+            xt = null;
+          if (xfRaw !== "" || xtRaw !== "") {
+            // only one box filled -> exclude just that question
+            xf = Number(xfRaw === "" ? xtRaw : xfRaw);
+            xt = Number(xtRaw === "" ? xfRaw : xtRaw);
+            if (
+              !Number.isInteger(xf) ||
+              !Number.isInteger(xt) ||
+              xf < 1 ||
+              xf > MAX ||
+              xt < 1 ||
+              xt > MAX ||
+              xf > xt
+            ) {
+              setErr(
+                "The excluded range must use whole numbers from 1 to " +
+                  MAX +
+                  ", with “from” not greater than “to”.",
+                "excl",
+              );
+              return null;
+            }
+          }
           var cRaw = countEl.value.trim(),
-            avail = e - s + 1,
+            avail = availCount(s, e, xf, xt),
             n = PER;
+          if (avail === 0) {
+            setErr("Nothing is left after excluding that range.", "excl");
+            return null;
+          }
           if (cRaw !== "") {
             n = Number(cRaw);
             if (!Number.isInteger(n) || n < 1) {
@@ -8779,7 +8834,7 @@
             }
           }
           setErr("");
-          return { s: s, e: e, n: n };
+          return { s: s, e: e, n: n, xf: xf, xt: xt };
         }
         function updateHint() {
           var s = parseInt(startEl.value, 10),
@@ -8787,7 +8842,12 @@
             h = $("hint"),
             want = parseInt(countEl.value, 10) >= 1 ? parseInt(countEl.value, 10) : PER;
           if (s >= 1 && e >= s && e <= MAX) {
-            var n = e - s + 1;
+            var xa = parseInt(exFromEl.value, 10),
+              xb = parseInt(exToEl.value, 10),
+              xf = isNaN(xa) ? (isNaN(xb) ? null : xb) : xa,
+              xt = isNaN(xb) ? xf : xb;
+            if (xf != null && (xf < 1 || xt > MAX || xf > xt)) xf = xt = null;
+            var n = availCount(s, e, xf, xt);
             h.textContent =
               n > want
                 ? n +
@@ -8799,6 +8859,7 @@
                   " question" +
                   (n === 1 ? "" : "s") +
                   " in range — all will be used.";
+            if (xf != null) h.textContent += " (excluding " + exLabel(xf, xt) + ")";
           } else {
             h.textContent =
               "Valid range: 1 – " +
@@ -8816,11 +8877,13 @@
           setErr("");
           updateHint();
         });
-        countEl.addEventListener("input", function () {
-          setErr("");
-          updateHint();
+        [countEl, exFromEl, exToEl].forEach(function (el) {
+          el.addEventListener("input", function () {
+            setErr("");
+            updateHint();
+          });
         });
-        [startEl, endEl, countEl].forEach(function (el) {
+        [startEl, endEl, countEl, exFromEl, exToEl].forEach(function (el) {
           el.addEventListener("keydown", function (e) {
             if (e.key === "Enter") begin();
           });
@@ -9199,7 +9262,11 @@
         /* ---------- quiz ---------- */
         function pick() {
           var pool = Q.filter(function (q) {
-            return q.id >= state.start && q.id <= state.end;
+            return (
+              q.id >= state.start &&
+              q.id <= state.end &&
+              !inEx(q.id, state.xf, state.xt)
+            );
           });
           state.picked = fairPick(pool, state.per, "practice");
           state.shown = {};
@@ -9210,6 +9277,8 @@
           state.start = r.s;
           state.end = r.e;
           state.per = r.n;
+          state.xf = r.xf;
+          state.xt = r.xt;
           pick();
           $("setup").style.display = "none";
           $("quiz").style.display = "block";
@@ -9233,7 +9302,11 @@
           list.textContent = "";
           var total = state.picked.length;
           $("mTitle").textContent =
-            "Questions " + state.start + " – " + state.end;
+            "Questions " +
+            state.start +
+            " – " +
+            state.end +
+            (state.xf != null ? " (excl. " + exLabel(state.xf, state.xt) + ")" : "");
           state.picked.forEach(function (q, i) {
             var card = document.createElement("article");
             card.className = "card q";
@@ -9308,7 +9381,7 @@
             card.appendChild(ans);
             list.appendChild(card);
           });
-          var n = state.end - state.start + 1;
+          var n = availCount(state.start, state.end, state.xf, state.xt);
           $("doneSub").textContent =
             n > state.per
               ? "You covered " +
@@ -9323,6 +9396,10 @@
                 "–" +
                 state.end +
                 ".";
+          if (state.xf != null)
+            $("doneSub").textContent =
+              $("doneSub").textContent.replace(/\.$/, "") +
+              " (excluding " + exLabel(state.xf, state.xt) + ").";
           updateProgress();
           if (TTS.cur != null) setReading(TTS.cur);
         }
