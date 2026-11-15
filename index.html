@@ -1180,6 +1180,7 @@
         </div>
         <nav class="nav" aria-label="Mode">
           <a href="#/" id="navPractice">Practice</a
+          ><a href="#/dates" id="navDates">Dates</a
           ><a href="#/exam" id="navExam">Exam</a
           ><a href="#/pictorial" id="navPictorial">Pictorial</a
           ><a href="#/recall" id="navRecall">Recall</a>
@@ -1197,8 +1198,12 @@
       <main>
         <div id="practiceView">
           <section id="setup" class="card hero">
-            <h2>Build your practice round</h2>
-            <p class="sub">
+            <h2 id="setupTitle">Build your practice round</h2>
+            <p class="sub" id="datesNote" style="display: none">
+              Dates mode: the pool is always all 75 questions whose answers are a
+              date or a year. Just choose how many you want (20 if left blank).
+            </p>
+            <p class="sub" id="setupSub">
               Choose the first and last question number, and how many questions
               you want (20 if left blank). They're picked at random from that
               range, in shuffled order. You can also leave out a sub-range.
@@ -8727,12 +8732,18 @@
           exFromEl = $("exFrom"),
           exToEl = $("exTo"),
           errEl = $("err");
+        var DATE_IDS = { 1:1,2:1,7:1,13:1,15:1,35:1,39:1,40:1,45:1,48:1,49:1,57:1,62:1,64:1,73:1,95:1,96:1,100:1,105:1,110:1,113:1,114:1,127:1,128:1,129:1,130:1,138:1,140:1,143:1,145:1,147:1,148:1,151:1,152:1,153:1,154:1,160:1,161:1,165:1,170:1,172:1,173:1,174:1,175:1,189:1,192:1,194:1,202:1,206:1,210:1,212:1,213:1,215:1,219:1,226:1,232:1,239:1,240:1,244:1,246:1,247:1,249:1,251:1,254:1,255:1,257:1,259:1,260:1,261:1,264:1,266:1,269:1,271:1,272:1,275:1 };
+        function isDates() {
+          return /^#\/dates/.test(location.hash);
+        }
         function inEx(id, xf, xt) {
           return xf != null && id >= xf && id <= xt;
         }
-        function availCount(s, e, xf, xt) {
+        function availCount(s, e, xf, xt, d) {
+          if (d === undefined) d = isDates();
           var c = 0;
-          for (var i = s; i <= e; i++) if (!inEx(i, xf, xt)) c++;
+          for (var i = s; i <= e; i++)
+            if (!inEx(i, xf, xt) && (!d || DATE_IDS[i])) c++;
           return c;
         }
         function exLabel(xf, xt) {
@@ -8750,6 +8761,31 @@
           exToEl.classList.toggle("bad", which === "excl");
         }
         function readRange() {
+          if (isDates()) {
+            // dates mode: the whole date pool is the target, only the count is chosen
+            var tot = Object.keys(DATE_IDS).length,
+              c0 = countEl.value.trim(),
+              dn = PER;
+            if (c0 !== "") {
+              dn = Number(c0);
+              if (!Number.isInteger(dn) || dn < 1) {
+                setErr(
+                  "The number of questions must be a whole number, at least 1.",
+                  "count",
+                );
+                return null;
+              }
+              if (dn > tot) {
+                setErr(
+                  "There are only " + tot + " date questions. Choose " + tot + " or fewer.",
+                  "count",
+                );
+                return null;
+              }
+            }
+            setErr("");
+            return { s: 1, e: MAX, n: dn, xf: null, xt: null };
+          }
           var sRaw = startEl.value.trim(),
             eRaw = endEl.value.trim();
           if (sRaw === "" || eRaw === "") {
@@ -8807,7 +8843,12 @@
             avail = availCount(s, e, xf, xt),
             n = PER;
           if (avail === 0) {
-            setErr("Nothing is left after excluding that range.", "excl");
+            setErr(
+              xf != null
+                ? "Nothing is left after excluding that range."
+                : "There are no date questions in that range.",
+              xf != null ? "excl" : "both",
+            );
             return null;
           }
           if (cRaw !== "") {
@@ -8841,6 +8882,14 @@
             e = parseInt(endEl.value, 10),
             h = $("hint"),
             want = parseInt(countEl.value, 10) >= 1 ? parseInt(countEl.value, 10) : PER;
+          if (isDates()) {
+            var dt = Object.keys(DATE_IDS).length;
+            h.textContent =
+              want < dt
+                ? dt + " date questions in the pool — " + want + " will be picked at random."
+                : "All " + dt + " date questions in the pool will be used.";
+            return;
+          }
           if (s >= 1 && e >= s && e <= MAX) {
             var xa = parseInt(exFromEl.value, 10),
               xb = parseInt(exToEl.value, 10),
@@ -8851,12 +8900,13 @@
             h.textContent =
               n > want
                 ? n +
-                  " questions in range — " +
+                  (isDates() ? " date questions" : " questions") +
+                  " in range — " +
                   want +
                   " will be picked at random."
                 : "Only " +
                   n +
-                  " question" +
+                  (isDates() ? " date question" : " question") +
                   (n === 1 ? "" : "s") +
                   " in range — all will be used.";
             if (xf != null) h.textContent += " (excluding " + exLabel(xf, xt) + ")";
@@ -9265,10 +9315,15 @@
             return (
               q.id >= state.start &&
               q.id <= state.end &&
-              !inEx(q.id, state.xf, state.xt)
+              !inEx(q.id, state.xf, state.xt) &&
+              (!state.dates || DATE_IDS[q.id])
             );
           });
-          state.picked = fairPick(pool, state.per, "practice");
+          state.picked = fairPick(
+            pool,
+            state.per,
+            state.dates ? "dates" : "practice",
+          );
           state.shown = {};
         }
         function begin() {
@@ -9279,6 +9334,7 @@
           state.per = r.n;
           state.xf = r.xf;
           state.xt = r.xt;
+          state.dates = isDates();
           pick();
           $("setup").style.display = "none";
           $("quiz").style.display = "block";
@@ -9302,11 +9358,12 @@
           list.textContent = "";
           var total = state.picked.length;
           $("mTitle").textContent =
-            "Questions " +
+            (state.dates ? "Date questions " : "Questions ") +
             state.start +
             " – " +
             state.end +
             (state.xf != null ? " (excl. " + exLabel(state.xf, state.xt) + ")" : "");
+          if (state.dates) $("mTitle").textContent = "Date questions";
           state.picked.forEach(function (q, i) {
             var card = document.createElement("article");
             card.className = "card q";
@@ -9381,7 +9438,13 @@
             card.appendChild(ans);
             list.appendChild(card);
           });
-          var n = availCount(state.start, state.end, state.xf, state.xt);
+          var n = availCount(
+            state.start,
+            state.end,
+            state.xf,
+            state.xt,
+            !!state.dates,
+          );
           $("doneSub").textContent =
             n > state.per
               ? "You covered " +
@@ -9400,6 +9463,11 @@
             $("doneSub").textContent =
               $("doneSub").textContent.replace(/\.$/, "") +
               " (excluding " + exLabel(state.xf, state.xt) + ").";
+          if (state.dates)
+            $("doneSub").textContent =
+              n > state.per
+                ? "You covered " + total + " random date questions."
+                : "You covered every date question.";
           updateProgress();
           if (TTS.cur != null) setReading(TTS.cur);
         }
@@ -9452,12 +9520,36 @@
           window.scrollTo({ top: 0 });
           startEl.focus();
         }
+        var lastMode = isDates() ? "dates" : "practice";
+        function applyMode() {
+          var d = isDates();
+          $("setupTitle").textContent = d
+            ? "Build your dates round"
+            : "Build your practice round";
+          $("datesNote").style.display = d ? "block" : "none";
+          $("setupSub").style.display = d ? "none" : "";
+          startEl.parentNode.style.display = d ? "none" : "";
+          endEl.parentNode.style.display = d ? "none" : "";
+          exFromEl.parentNode.parentNode.style.display = d ? "none" : "";
+          $("chips").style.display = d ? "none" : "";
+          setErr("");
+          updateHint();
+        }
+        window.addEventListener("hashchange", function () {
+          if (/^#\/(exam|pictorial|recall)/.test(location.hash)) return;
+          var m = isDates() ? "dates" : "practice";
+          if (m === lastMode) return;
+          lastMode = m;
+          if ($("quiz").style.display === "block") backToSetup();
+          applyMode();
+        });
         $("back").addEventListener("click", backToSetup);
         $("back2").addEventListener("click", backToSetup);
         window.addEventListener("pagehide", function () {
           if (SS) SS.cancel();
         });
         updateHint();
+        applyMode();
         (function () {
           /* =====================================================================
      EXAM MODE  (routes: #/exam, #/exam/new, #/exam/master/CODE, #/exam/team/CODE)
@@ -9631,6 +9723,7 @@
             var top = parts[0],
               inExam = top === "exam",
               inRecall = top === "recall",
+              inDates = top === "dates",
               inPic = top === "pictorial" || inRecall;
             var sub = parts[1] || "",
               code = (parts[2] || "").toUpperCase();
@@ -9642,7 +9735,11 @@
             );
             $("navPractice").setAttribute(
               "aria-current",
-              inExam || inPic ? "false" : "page",
+              inExam || inPic || inDates ? "false" : "page",
+            );
+            $("navDates").setAttribute(
+              "aria-current",
+              inDates ? "page" : "false",
             );
             $("navExam").setAttribute(
               "aria-current",
@@ -9658,14 +9755,18 @@
             );
             footerTxt.textContent = inExam
               ? "Exam mode · the quiz master controls the exam · the team screen follows along"
-              : inRecall
+              : inDates
+                ? "Dates · practice only the questions whose answers are dates or years"
+                : inRecall
                 ? "Recall · random pictures, name the place, check, repeat"
                 : inPic
                   ? "Pictorial round · spin the wheel, study the pictures, then answer the questions"
                   : footerOrig;
             brandSub.textContent = inExam
               ? "Exam mode · rapid-fire round"
-              : inRecall
+              : inDates
+                ? "Dates mode · date and year questions"
+                : inRecall
                 ? "Picture recall"
                 : inPic
                   ? "Pictorial round"
