@@ -1,2 +1,0 @@
-1. Make pictorial.json 
-2. Make the pictorial round

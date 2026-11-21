@@ -8,6 +8,9 @@ A question joins a place if any of its terms/subs appears in the question or ans
 (only inside `only` sections when given), or if its section is in `sections`.
 Place terms in the question text are replaced by `generic`; `subs` are custom rewrites run first.
 Answers are never changed. `reveals` marks questions whose answer is the place itself (shown last)."""
+
+# Hello World
+
 import json, re, sys, os, difflib
 SEC = {1:(1,15),2:(16,23),3:(24,25),4:(26,44),5:(45,59),6:(60,74),7:(75,89),8:(90,100),9:(101,108),
        10:(109,127),11:(128,169),12:(170,191),13:(192,200),14:(201,243),15:(244,256),16:(257,275)}
